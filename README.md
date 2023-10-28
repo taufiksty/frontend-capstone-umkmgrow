@@ -56,7 +56,7 @@ yarn dev
 
 ## Team Members
 
-Here is an example table of the team members who have contributed to this project:
+Here is a table of the team members who have contributed to this project:
 
 | Name                   | Role                         | GitHub Profile                                   |
 | ---------------------- | ---------------------------- | ------------------------------------------------ |
