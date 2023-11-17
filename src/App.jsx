@@ -1,8 +1,8 @@
-import ClassPage from "./features/classpage";
+import ExamPage from "./features/ExamPage";
 
 function App() {
   return (
-    <ClassPage />
+    <ExamPage />
   );
 }
 
