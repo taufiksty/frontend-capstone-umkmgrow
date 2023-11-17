@@ -1,5 +1,9 @@
+import ExamPage from "./features/exam-page/Exampage";
+
 function App() {
-	return <h1>Hello World</h1>;
+  return (
+    <ExamPage />
+  );
 }
 
 export default App;
