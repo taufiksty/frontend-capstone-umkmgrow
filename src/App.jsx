@@ -1,5 +1,7 @@
+import Daftar from "./pages/daftar/Daftar";
+
 function App() {
-	return <h1>Hello World</h1>;
+  return <Daftar />;
 }
 
 export default App;
