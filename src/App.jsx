@@ -1,5 +1,11 @@
+import MenuKelas from "./menu-kelas/MenuKelas";
+
 function App() {
-	return <h1>Hello World</h1>;
+  return (
+    <>
+      <MenuKelas />
+    </>
+  );
 }
 
 export default App;
