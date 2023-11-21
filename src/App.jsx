@@ -1,5 +1,11 @@
+import DetailKelas from "./pages/detail-kelas/DetailKelas";
+
 function App() {
-	return <h1>Hello World</h1>;
+  return (
+    <>
+      <DetailKelas />
+    </>
+  );
 }
 
 export default App;
