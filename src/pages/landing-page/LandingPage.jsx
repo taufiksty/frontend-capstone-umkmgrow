@@ -1,12 +1,12 @@
 import React from "react";
-import Logo from "./img/Logo.svg";
-import LogoSkilvul from "./img/LogoSkilvul.png";
-import Hero from "./img/hero-section.png";
-import Card1 from "./img/rafiki.png";
-import Card2 from "./img/bro.png";
-import Card3 from "./img/amico.png";
-import Tentang1 from "./img/what.png";
-import Tentang2 from "./img/tentang2.png";
+import Logo from "../../assets/Logo.svg";
+import LogoSkilvul from "../../assets/LogoSkilvul.png";
+import Hero from "../../assets/images/landing-page/hero-section.png";
+import Card1 from "../../assets/images/landing-page/rafiki.png";
+import Card2 from "../../assets/images/landing-page/bro.png";
+import Card3 from "../../assets/images/landing-page/amico.png";
+import Tentang1 from "../../assets/images/landing-page/what.png";
+import Tentang2 from "../../assets/images/landing-page/tentang2.png";
 
 function LandingPage() {
   return (
@@ -108,7 +108,7 @@ function LandingPage() {
 
       <div className="md:px-[154px] px-4 flex justify-between mt-32 items-center">
         <div>
-          <img src={Tentang1} alt="what" />
+          <img className="w-[400px]" src={Tentang1} alt="what" />
         </div>
         <div>
           <h1 className="font-bold text-3xl mb-4">Tentang UMKM Grow</h1>
@@ -128,15 +128,15 @@ function LandingPage() {
         <div>
           <h1 className="font-bold text-3xl mb-4">Layanan UMKM Grow</h1>
           <p className="text-justify">
-            UMKM Grow menyediakan beberapa layanan seperti <br /> Grow Digital,
-            Grow Your Bussiness, Grow Your Market, <br /> dan Grow Connect.
+            UMKM Grow menyediakan beberapa layanan seperti Grow Digital, Grow
+            Your Bussiness, Grow Your Market, dan Grow Connect.
           </p>
           <button className="px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
             Lihat kelas
           </button>
         </div>
         <div>
-          <img src={Tentang2} alt="what" />
+          <img className="w-[900px]" src={Tentang2} alt="what" />
         </div>
       </div>
 
