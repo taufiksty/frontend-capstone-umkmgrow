@@ -1,4 +1,4 @@
-import MenuKelas from "./menu-kelas/MenuKelas";
+import MenuKelas from "./pages/menu-kelas/menuKelas";
 
 function App() {
   return (

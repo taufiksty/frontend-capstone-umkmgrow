@@ -31,7 +31,7 @@ function MenuKelas() {
         </div>
       </nav>
 
-      <div className="bg-[#E5F2FA] md:px-[154px] py-44 text-center">
+      <div className="bg-[#E5F2FA] md:px-[154px] py-48 text-center">
         <div>
           <h1 className="font-bold text-4xl mb-2 leading-tight">
             Berkembang Bersama UMKM Grow
