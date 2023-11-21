@@ -1,11 +1,11 @@
 import React from "react";
-import Logo from "./img/Logo.svg"; 
-import LogoSkilvul from "./img/LogoSkilvul.png";
+import Logo from "../../assets/Logo.svg"; 
+import LogoSkilvul from "../../assets/LogoSkilvul.png";
 
 function ClassPage() {
   return (
     <div className="body-font font-poppins">
-      <nav className="flex justify-between bg-[#E5F2FA] md:px-[154px] py-4 items-center border-b-2 fixed w-full">
+      <nav className="flex justify-between bg-[#E5F2FA] md:px-[154px] py-4 items-center border-b-2 w-full">
         <div className="mr-16 cursor-pointer">
           <img src={Logo} alt="logo" />
         </div>
