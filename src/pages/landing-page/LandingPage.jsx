@@ -1,0 +1,164 @@
+import React from "react";
+import Logo from "../../assets/Logo.svg";
+import LogoSkilvul from "../../assets/LogoSkilvul.png";
+import Hero from "../../assets/images/landing-page/hero-section.png";
+import Card1 from "../../assets/images/landing-page/rafiki.png";
+import Card2 from "../../assets/images/landing-page/bro.png";
+import Card3 from "../../assets/images/landing-page/amico.png";
+import Tentang1 from "../../assets/images/landing-page/what.png";
+import Tentang2 from "../../assets/images/landing-page/tentang2.png";
+import Card from "../../components/landing-page/Card";
+
+function LandingPage() {
+  return (
+    <div className="body-font font-poppins">
+      <nav className="md:flex md:items-center md:justify-between bg-[#E5F2FA] md:px-[154px] py-4 border-b border-b-slate-300  fixed w-full md:opacity-100 opacity-0">
+        <div className="mr-16 cursor-pointer mx-4 my-4 md:my-0">
+          <img src={Logo} alt="logo" />
+        </div>
+        <div className="mr-auto">
+          <ul className="md:flex gap-6 cursor-pointer z-[-1] md:z-auto md:static w-full">
+            <li className="mx-4 my-4 md:my-0 md:mx-0 hover:text-[#008D91]">
+              Beranda
+            </li>
+            <li className="mx-4 my-4 md:my-0 md:mx-0 hover:text-[#008D91]">
+              Tentang
+            </li>
+            <li className="mx-4 my-4 md:my-0 md:mx-0 hover:text-[#008D91]">
+              Kelas
+            </li>
+            <li className="mx-4 my-4 md:my-0 md:mx-0 hover:text-[#008D91]">
+              Kontak
+            </li>
+          </ul>
+        </div>
+        <div className="md:flex gap-2">
+          <button className="px-4 py-1 border-2 border-[#008D91] rounded-md text-[#008D91] mx-4 my-2 md:my-0 md:mx-0 hover:bg-[#008D91] hover:text-white hover:font-semibold">
+            Login
+          </button>{" "}
+          <br />
+          <button className="px-4 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mx-4 my-2 md:my-0 md:mx-0 hover:font-semibold">
+            Daftar
+          </button>
+        </div>
+      </nav>
+
+      <div className="bg-[#E5F2FA] md:px-[154px] px-4 py-24 md:flex md:justify-between md:items-center">
+        <div>
+          <h1 className="font-bold text-4xl mb-4 leading-tight">
+            Menumbuhkan UMKM <br /> Tangguh dengan <br />
+            Edukasi Berkualitas!
+          </h1>
+          <p>
+            Pelajari kelas yang Anda butuhkan dan segera aplikasikan di bisnis
+            Anda.
+          </p>
+          <button className="px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
+            Ambil Kelas
+          </button>
+        </div>
+        <div>
+          <img src={Hero} width="500" alt="hero" />
+        </div>
+      </div>
+
+      <div className="bg-[#E5F2FA] text-center pt-14 rounded-b-full">
+        <div>
+          <h1 className="font-bold text-3xl mb-8">
+            Berkembang Bersama UMKM Grow
+          </h1>
+        </div>
+        <div className="md:flex justify-center gap-6">
+          <Card
+            img={Card1}
+            content="Pilih kelas yang sesuai dengan minat dan tujuan pendidikan Anda"
+          />
+          <Card
+            img={Card2}
+            content="Kuasai Berbagai Materi yang Sudah Disediakan UMKM Grow"
+          />
+          <Card
+            img={Card3}
+            content="Jangan lewatkan kesempatan untuk menerima sertifikat"
+          />
+        </div>
+      </div>
+
+      <div className="md:px-[154px] px-4 flex justify-between mt-32 items-center">
+        <div>
+          <img className="w-[400px]" src={Tentang1} alt="what" />
+        </div>
+        <div>
+          <h1 className="font-bold text-3xl mb-4">Tentang UMKM Grow</h1>
+          <p className="text-justify">
+            Sebuah platform edukasi online yang memberikan <br /> pengetahuan
+            dan keterampilan kepada pelaku UMKM <br /> untuk meningkatkan
+            kualitas bisnisnya. Berfokus pada <br /> inovasi, pemasaran,
+            manajemen keuangan, dan teknologi
+          </p>
+          <button className="px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
+            Lihat kelas
+          </button>
+        </div>
+      </div>
+
+      <div className="md:px-[154px] px-4 md:flex md:justify-between mt-32 items-center">
+        <div>
+          <h1 className="font-bold text-3xl mb-4">Layanan UMKM Grow</h1>
+          <p className="text-justify">
+            UMKM Grow menyediakan beberapa layanan seperti Grow Digital, Grow
+            Your Bussiness, Grow Your Market, dan Grow Connect.
+          </p>
+          <button className="px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
+            Lihat kelas
+          </button>
+        </div>
+        <div>
+          <img className="w-[900px]" src={Tentang2} alt="what" />
+        </div>
+      </div>
+
+      <div className="md:px-[154px] px-4 pt-8 md:pb-16 pb-6 bg-[#E5F2FA] md:flex md:justify-between mt-16 border-b-2">
+        <div>
+          <img src={Logo} alt="" />
+          <p className="mt-2">Berkembang Bersama UMKM Grow</p>
+          <div>
+            <img src="" alt="" />
+          </div>
+        </div>
+        <div>
+          <h4 className="md:mb-4 mt-2 font-semibold">Kontak</h4>
+          <ul className="cursor-pointer">
+            <li className="hover:text-[#008D91]">umkmgrowfs9@gmail.com</li>
+            <li className="hover:text-[#008D91]">+02198765432</li>
+          </ul>
+        </div>
+        <div>
+          <h4 className="md:mb-4 mt-2 font-semibold">Features</h4>
+          <ul className="cursor-pointer">
+            <li className="hover:text-[#008D91]">Beranda</li>
+            <li className="hover:text-[#008D91]">Tentang</li>
+            <li className="hover:text-[#008D91]">Kelas</li>
+            <li className="hover:text-[#008D91]">Kontak</li>
+          </ul>
+        </div>
+        <div className="mt-2">
+          <img src={LogoSkilvul} alt="" />
+        </div>
+      </div>
+      <div className="md:px-[154px] px-4 md:flex md:justify-between py-4 bg-[#E5F2FA]">
+        <div>
+          <p>Copyright @2023 UMKM Grow. All rights reserved</p>
+        </div>
+        <div>
+          <ul className="md:flex gap-10 cursor-pointer">
+            <li className="hover:text-[#008D91]">Syarat dan Ketentuan</li>
+            <li className="hover:text-[#008D91]">Kebijakan Privasi</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default LandingPage;
