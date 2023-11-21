@@ -7,6 +7,7 @@ import Card2 from "../../assets/images/landing-page/bro.png";
 import Card3 from "../../assets/images/landing-page/amico.png";
 import Tentang1 from "../../assets/images/landing-page/what.png";
 import Tentang2 from "../../assets/images/landing-page/tentang2.png";
+import Card from "../../components/landing-page/Card";
 
 function LandingPage() {
   return (
@@ -68,41 +69,18 @@ function LandingPage() {
           </h1>
         </div>
         <div className="md:flex justify-center gap-6">
-          <div className="text-center py-6 px-6 bg-white border border-gray-200 rounded-lg shadow">
-            <div>
-              <img className="mb-4 ml-8" src={Card1} alt="card1" />
-              <p>
-                Pilih kelas yang <br /> sesuai dengan minat <br /> dan tujuan
-                pendidikan Anda
-              </p>
-            </div>
-          </div>
-          <div className="text-center py-6 px-6 bg-white border border-gray-200 rounded-lg shadow">
-            <div>
-              <img
-                className="grid justify-items-center mb-4 items-center"
-                src={Card2}
-                alt="card2"
-              />
-              <p>
-                Kuasai Berbagai <br /> Materi yang Sudah <br /> Disediakan UMK
-                Grow
-              </p>
-            </div>
-          </div>
-          <div className="text-center py-6 px-6 bg-white border border-gray-200 rounded-lg shadow">
-            <div>
-              <img
-                className="flex justify-center mb-4"
-                src={Card3}
-                alt="card3"
-              />
-              <p>
-                Jangan lewatkan <br /> kesempatan untuk <br /> menerima
-                sertifikat
-              </p>
-            </div>
-          </div>
+          <Card
+            img={Card1}
+            content="Pilih kelas yang sesuai dengan minat dan tujuan pendidikan Anda"
+          />
+          <Card
+            img={Card2}
+            content="Kuasai Berbagai Materi yang Sudah Disediakan UMKM Grow"
+          />
+          <Card
+            img={Card3}
+            content="Jangan lewatkan kesempatan untuk menerima sertifikat"
+          />
         </div>
       </div>
 
