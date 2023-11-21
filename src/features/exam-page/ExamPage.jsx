@@ -1,6 +1,6 @@
 import React from "react";
-import Logo from "./img/Logo.svg";
-import LogoSkilvul from "./img/LogoSkilvul.png";
+import Logo from "../../assets/Logo.svg"; 
+import LogoSkilvul from "../../assets/LogoSkilvul.png";
 
 function ExamPage() {
   return (
