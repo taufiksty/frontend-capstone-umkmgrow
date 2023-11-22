@@ -1,0 +1,61 @@
+import React from "react";
+import Logo from "./img/Logo.svg";
+
+function Daftar() {
+  return (
+    <div className="body-font font-poppins flex justify-center items-center mt-[50px]">
+      <div className="max-w-sm text-center px-14 py-8 bg-white border border-gray-700 rounded-lg shadow ">
+        <div className="flex justify-center mb-8">
+          <img src={Logo} alt="logo" />
+        </div>
+
+        <div>
+          <h1 className="font-bold text-2xl mb-6">Buat Akun</h1>
+        </div>
+
+        <div>
+          <form>
+            <input
+              className="border border-gray-700 py-1 px-3 rounded-md mb-3"
+              type="text"
+              placeholder="Nama Lengkap"
+            />
+            <br />
+            <input
+              className="border border-gray-700 py-1 px-3 rounded-md mb-3"
+              type="text"
+              placeholder="Email"
+            />{" "}
+            <br />
+            <input
+              className="border border-gray-700 py-1 px-3 rounded-md mb-3"
+              type="text"
+              placeholder="Password"
+            />{" "}
+            <br />
+            <input
+              className="border border-gray-700 py-1 px-3 rounded-md mb-4"
+              type="text"
+              placeholder="Konfirmasi Password"
+            />
+          </form>
+        </div>
+
+        <div>
+          <button className="w-full px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white shadow hover:font-semibold">
+            Daftar
+          </button>
+        </div>
+
+        <div className="flex justify-center mt-4 text-sm gap-1">
+          <p>Sudah memiliki akun?</p>
+          <button className="text-[#008D91] font-semibold hover:font-bold">
+            Masuk
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default Daftar;
