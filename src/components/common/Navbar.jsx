@@ -10,7 +10,7 @@ function Navbar() {
 	const navigate = useNavigate();
 
 	return (
-		<nav className="flex flex-col md:flex-row md:items-center md:justify-between bg-[#E5F2FA] md:px-[154px] md:py-4 border-b border-b-slate-300  fixed w-full md:opacity-100">
+		<nav className="flex flex-col md:flex-row md:items-center md:justify-between bg-[#E5F2FA] md:px-[154px] md:py-4 border-b border-b-slate-300  fixed w-full shadow-md">
 			<div className="flex justify-between items-center m-4 md:mr-16 md:my-0">
 				<Link to="/">
 					<img
@@ -50,7 +50,7 @@ function Navbar() {
 			<div
 				className={`${
 					openNav ? 'flex' : 'hidden md:flex'
-				} self-end md:self-center md:gap-2 pb-4 md:space-x-4 md:pb-0`}>
+				} self-end md:self-center md:gap-2 mx-3 pb-4 space-x-4 md:pb-0`}>
 				<Button
 					variant="secondary"
 					onClick={() => navigate('/login')}>

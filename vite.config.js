@@ -11,4 +11,17 @@ export default defineConfig({
 			'@': path.resolve(__dirname, 'src'),
 		},
 	},
+	server: {
+		cors: {
+			origin: '*',
+		},
+		proxy: {
+			'/api': {
+				target: 'http://localhost:3000/api',
+				changeOrigin: true,
+				secure: false,
+				rewrite: (path) => path.replace(/^\/api/, ''),
+			},
+		},
+	},
 });
