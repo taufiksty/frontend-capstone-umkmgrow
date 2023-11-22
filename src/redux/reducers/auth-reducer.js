@@ -4,6 +4,8 @@ import {
 	fetchAPI,
 	fetchAPIError,
 	fetchAPIFinish,
+	refreshAuth,
+	removeAuth,
 } from '../actions/auth';
 
 const data = localStorage.getItem('auth')
@@ -33,6 +35,13 @@ const authReducer = createReducer(initialState, (builder) => {
 		.addCase(addAuth, (state, action) => {
 			state.data = action.payload;
 			localStorage.setItem('auth', JSON.stringify(state.data));
+		})
+		.addCase(refreshAuth, (state, action) => {
+			state.data = { ...state.data, accessToken: action.payload };
+		})
+		.addCase(removeAuth, (state) => {
+			localStorage.removeItem('auth');
+			state.data = {};
 		});
 });
 

@@ -1,5 +1,6 @@
 import Logo from '@/assets/images/common/Logo.svg';
 import LogoSkilvul from '@/assets/images/common/LogoSkilvul.png';
+import { Link } from 'react-router-dom';
 
 function Footer() {
 	return (
@@ -23,8 +24,12 @@ function Footer() {
 					<div className="ml-20 md:ml-44">
 						<h4 className="md:mb-4 mt-2 font-semibold">Features</h4>
 						<ul className="cursor-pointer">
-							<li className="hover:text-[#008D91]">Beranda</li>
-							<li className="hover:text-[#008D91]">Kelas</li>
+							<Link to="/">
+								<li className="hover:text-[#008D91]">Beranda</li>
+							</Link>
+							<Link to="/class">
+								<li className="hover:text-[#008D91]">Kelas</li>
+							</Link>
 						</ul>
 					</div>
 				</div>
