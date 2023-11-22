@@ -1,10 +1,13 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import LandingPage from '@/pages/Home';
 import Daftar from './pages/Daftar';
 import Login from './pages/Login';
 import ErrorPage from './pages/Error';
+import { useSelector } from 'react-redux';
 
 function App() {
+	const authData = useSelector((state) => state.auth.data);
+
 	return (
 		<BrowserRouter>
 			<Routes>
@@ -14,11 +17,11 @@ function App() {
 				/>
 				<Route
 					path="/signup"
-					element={<Daftar />}
+					element={authData ? <Navigate to="/" /> : <Daftar />}
 				/>
 				<Route
 					path="/login"
-					element={<Login />}
+					element={authData ? <Navigate to="/" /> : <Login />}
 				/>
 				<Route
 					path="/servererror"

@@ -1746,11 +1746,6 @@ keyv@^4.5.3:
   dependencies:
     json-buffer "3.0.1"
 
-ldbutton@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/ldbutton/-/ldbutton-2.0.2.tgz#8d26dceeb4a38bbfec11d4ca85377eed1d46a4bc"
-  integrity sha512-924UoWBrMIyWU8GNH4Xc+nnGvt7GCXFmyqmTG5PuNnFhpmqCblfjKofJpdKey62wFks3KGvu5KZmprHY7P+WAQ==
-
 levn@^0.4.1:
   version "0.4.1"
   resolved "https://registry.npmjs.org/levn/-/levn-0.4.1.tgz"

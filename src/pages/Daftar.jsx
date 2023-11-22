@@ -100,9 +100,11 @@ function Daftar() {
 					<Button
 						onClick={handleSubmit}
 						disabled={loading}
-						className={`w-full ld-ext-right ${loading && 'running'}`}>
-						Daftar
-						<div className="ld ld-ring ld-spin"></div>
+						className={`w-full flex justify-center items-center space-x-3 ${
+							loading && 'opacity-60'
+						}`}>
+						<p>Daftar</p>
+						{loading && <i className="fa fa-circle-o-notch fa-spin"></i>}
 					</Button>
 				</div>
 

@@ -9,7 +9,7 @@ function ErrorPage() {
 				alt="error_server"
 			/>
 			<p className="text-center mx-20">
-				Maap, coba lagi nanti yah, server kami sedang down nih.
+				Maap, server kami down nih. Coba refresh lagi nanti, ya!
 			</p>
 		</div>
 	);
