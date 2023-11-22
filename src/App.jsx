@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from '@/pages/Home';
 import Daftar from './pages/Daftar';
+import Login from './pages/Login';
 
 function App() {
 	return (
@@ -13,6 +14,10 @@ function App() {
 				<Route
 					path="/signup"
 					element={<Daftar />}
+				/>
+				<Route
+					path="/login"
+					element={<Login />}
 				/>
 			</Routes>
 		</BrowserRouter>
