@@ -1,8 +1,50 @@
 import Logo from '@/assets/images/common/Logo.svg';
 import Button from '../components/common/Button';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import Swal from 'sweetalert2';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAPIFinish, signIn } from '../redux/actions/auth';
 
 function Login() {
+	const [input, setInput] = useState({ email: '', password: '' });
+
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	function handleSubmit(e) {
+		e.preventDefault();
+
+		if (!input.email || !input.password) {
+			Swal.fire({
+				title: 'Periksa lagi, ya!',
+				text: 'Sepertinya ada input yang tidak sesuai.',
+				icon: 'error',
+				confirmButtonColor: '#008D91',
+			});
+		} else {
+			dispatch(signIn(input)).then((res) => {
+				if (res ? res.success : null) navigate('/');
+			});
+		}
+	}
+
+	const loading = useSelector((state) => state.auth.loading);
+	const error = useSelector((state) => state.auth.error);
+
+	if (error) {
+		if (error.status !== 500) {
+			Swal.fire({
+				title: 'Periksa lagi, ya!',
+				text: 'Sepertinya ada input yang salah.',
+				icon: 'error',
+				confirmButtonColor: '#008D91',
+			}).then(() => dispatch(fetchAPIFinish()));
+		} else {
+			navigate('/servererror');
+		}
+	}
+
 	return (
 		<div className="flex justify-center items-center h-[90vh]">
 			<div className="max-w-sm md:max-w-md space-y-5 text-center px-14 py-8 border border-gray-700 rounded-lg shadow ">
@@ -21,26 +63,30 @@ function Login() {
 					<form>
 						<input
 							className="border border-gray-700 py-1 px-3 rounded-md mb-3 w-full"
-							type="text"
+							type="email"
 							name="email"
+							value={input.email}
+							onChange={(e) => setInput({ ...input, email: e.target.value })}
 							placeholder="Email"
-						/>{' '}
-						<br />
+						/>
 						<input
 							className="border border-gray-700 py-1 px-3 rounded-md mb-3 w-full"
-							type="text"
+							type="password"
 							name="password"
+							value={input.password}
+							onChange={(e) => setInput({ ...input, password: e.target.value })}
 							placeholder="Password"
-						/>{' '}
-						<br />
+						/>
 					</form>
 				</div>
 
 				<div>
 					<Button
-						onClick={() => {}}
-						className="w-full">
+						onClick={handleSubmit}
+						disabled={loading}
+						className={`w-full ld-ext-right ${loading && 'running'}`}>
 						Masuk
+						<div className="ld ld-ring ld-spin"></div>
 					</Button>
 				</div>
 

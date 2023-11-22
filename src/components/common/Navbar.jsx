@@ -3,9 +3,11 @@ import { useState } from 'react';
 import { IoClose, IoMenu } from 'react-icons/io5';
 import { Link, useNavigate } from 'react-router-dom';
 import Button from './Button';
+import { useSelector } from 'react-redux';
 
 function Navbar() {
 	const [openNav, setOpenNav] = useState(false);
+	const authData = useSelector((state) => state.auth.data) || null;
 
 	const navigate = useNavigate();
 
@@ -47,17 +49,31 @@ function Navbar() {
 					</Link>
 				</ul>
 			</div>
-			<div
-				className={`${
-					openNav ? 'flex' : 'hidden md:flex'
-				} self-end md:self-center md:gap-2 mx-3 pb-4 space-x-4 md:pb-0`}>
-				<Button
-					variant="secondary"
-					onClick={() => navigate('/login')}>
-					Login
-				</Button>
-				<Button onClick={() => navigate('/signup')}>Daftar</Button>
-			</div>
+			{authData ? (
+				<div
+					className={`${
+						openNav ? 'flex' : 'hidden md:flex'
+					} self-end md:self-center md:gap-2 mx-3 pb-4 space-x-4 md:pb-0`}>
+					<Button
+						variant="secondary"
+						onClick={() => navigate('/profile')}>
+						Profile
+					</Button>
+					<Button onClick={() => {}}>Keluar</Button>
+				</div>
+			) : (
+				<div
+					className={`${
+						openNav ? 'flex' : 'hidden md:flex'
+					} self-end md:self-center md:gap-2 mx-3 pb-4 space-x-4 md:pb-0`}>
+					<Button
+						variant="secondary"
+						onClick={() => navigate('/login')}>
+						Login
+					</Button>
+					<Button onClick={() => navigate('/signup')}>Daftar</Button>
+				</div>
+			)}
 		</nav>
 	);
 }

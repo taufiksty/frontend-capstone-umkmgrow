@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import { signUp } from '../redux/actions/auth';
+import { fetchAPIFinish, signUp } from '../redux/actions/auth';
 import ErrorPage from './Error';
 
 function Daftar() {
@@ -40,7 +40,7 @@ function Daftar() {
 				text: 'Sepertinya ada input yang tidak sesuai.',
 				icon: 'error',
 				confirmButtonColor: '#008D91',
-			});
+			}).then(() => dispatch(fetchAPIFinish()));
 		} else {
 			return <ErrorPage />;
 		}
