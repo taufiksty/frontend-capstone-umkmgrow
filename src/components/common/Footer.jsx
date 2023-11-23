@@ -27,7 +27,7 @@ function Footer() {
 							<Link to="/">
 								<li className="hover:text-[#008D91]">Beranda</li>
 							</Link>
-							<Link to="/class">
+							<Link to="/courses">
 								<li className="hover:text-[#008D91]">Kelas</li>
 							</Link>
 						</ul>
