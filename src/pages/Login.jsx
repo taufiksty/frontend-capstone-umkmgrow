@@ -1,6 +1,6 @@
 import Logo from '@/assets/images/common/Logo.svg';
 import Button from '../components/common/Button';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useDispatch, useSelector } from 'react-redux';
@@ -45,6 +45,19 @@ function Login() {
 		}
 	}
 
+	const { search } = useLocation();
+	const queryParams = new URLSearchParams(search);
+
+	if (queryParams.get('access') === 'false') {
+		Swal.fire({
+			position: 'top-end',
+			icon: 'info',
+			title: 'Kamu login dulu, yah!',
+			showConfirmButton: false,
+			timer: 1500,
+		}).then(() => navigate('/login', { replace: true }));
+	}
+
 	return (
 		<div className="flex justify-center items-center h-[90vh]">
 			<div className="max-w-sm md:max-w-md space-y-5 text-center px-14 py-8 border border-gray-700 rounded-lg shadow ">
@@ -84,11 +97,11 @@ function Login() {
 					<Button
 						onClick={handleSubmit}
 						disabled={loading}
-						className={`w-full flex justify-center items-center space-x-3 ${
+						className={`w-full flex justify-center items-center ${
 							loading && 'opacity-60'
 						}`}>
-						<p>Masuk</p>
-						{loading && <i className="fa fa-circle-o-notch fa-spin"></i>}
+						Masuk
+						{loading && <i className="fa fa-circle-o-notch fa-spin ml-3"></i>}
 					</Button>
 				</div>
 

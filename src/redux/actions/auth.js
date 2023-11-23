@@ -3,6 +3,7 @@ import { createAction } from '@reduxjs/toolkit';
 
 export const addAuth = createAction('AUTH/ADD');
 export const refreshAuth = createAction('AUTH/REFRESH');
+export const refreshDataUser = createAction('AUTH/REFRESH_DATA_USER');
 export const removeAuth = createAction('AUTH/REMOVE');
 export const fetchAPI = createAction('AUTH/FETCH');
 export const fetchAPIFinish = createAction('AUTH/FETCH_FINISH');
@@ -53,6 +54,23 @@ export const signOut = (token) => {
 			return response.data;
 		} catch (error) {
 			dispatch(fetchAPIError(error.response));
+		}
+	};
+};
+
+export const refreshUserEnrollments = (token) => {
+	return async (dispatch) => {
+		dispatch(fetchAPI());
+
+		try {
+			const response = await axios.get('/api/enrollment', {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+
+			dispatch(refreshDataUser(response.data.data.enrollments));
+			dispatch(fetchAPIFinish());
+		} catch (error) {
+			dispatch(fetchAPIError(error.message));
 		}
 	};
 };

@@ -8,10 +8,11 @@ import Button from './Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAPIFinish, signOut } from '../../redux/actions/auth';
 import useToken from '../../hooks/useToken';
+import PropTypes from 'prop-types';
 
-function Navbar() {
+function Navbar({ variant = 'primary' }) {
 	const [openNav, setOpenNav] = useState(false);
-	const [openMenuProfile, setOpenMenuProfile] = useState(true);
+	const [openMenuProfile, setOpenMenuProfile] = useState(false);
 
 	const authData = useSelector((state) => state.auth.data.user) || null;
 	const accessToken = useToken();
@@ -126,7 +127,10 @@ function Navbar() {
 	};
 
 	return (
-		<nav className="flex flex-col md:flex-row md:items-center md:justify-between bg-[#E5F2FA] md:px-[154px] md:py-4 border-b border-b-slate-300  fixed w-full shadow-md">
+		<nav
+			className={`flex flex-col md:flex-row md:items-center md:justify-between ${
+				variant === 'primary' ? 'bg-[#E5F2FA]' : 'bg-white'
+			} md:px-[154px] md:py-4 border-b border-b-slate-300  fixed w-full shadow-md`}>
 			<div
 				ref={navRef}
 				className="flex justify-between items-center m-4 md:mr-16 md:my-0">
@@ -184,3 +188,7 @@ function Navbar() {
 }
 
 export default Navbar;
+
+Navbar.propTypes = {
+	variant: PropTypes.string,
+};
