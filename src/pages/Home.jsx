@@ -7,6 +7,7 @@ import Tentang2 from '@/assets/images/home/tentang2.png';
 import Card from '@/components/home/Card';
 import Navbar from '@/components/common/Navbar';
 import Footer from '@/components/common/Footer';
+import { Link } from 'react-router-dom';
 
 function Home() {
 	return (
@@ -24,9 +25,11 @@ function Home() {
 						Pelajari kelas yang Anda butuhkan dan segera aplikasikan di bisnis
 						Anda.
 					</p>
-					<button className="px-2 py-1 border-2 self-start border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
-						Ambil Kelas
-					</button>
+					<Link to="/courses">
+						<button className="px-2 py-1 border-2 self-start border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
+							Ambil Kelas
+						</button>
+					</Link>
 				</div>
 				<div className="flex justify-center">
 					<img
@@ -78,9 +81,11 @@ function Home() {
 							bisnisnya. Berfokus pada inovasi, pemasaran, manajemen keuangan,
 							dan teknologi
 						</p>
-						<button className="px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
-							Lihat kelas
-						</button>
+						<Link to="/courses">
+							<button className="px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
+								Lihat kelas
+							</button>
+						</Link>
 					</div>
 				</div>
 
@@ -91,9 +96,11 @@ function Home() {
 							UMKM Grow menyediakan beberapa layanan seperti Grow Digital, Grow
 							Your Bussiness, Grow Your Market, dan Grow Connect.
 						</p>
-						<button className="px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
-							Lihat kelas
-						</button>
+						<Link to="/courses">
+							<button className="px-2 py-1 border-2 border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
+								Lihat kelas
+							</button>
+						</Link>
 					</div>
 					<div className="md:basis-1/2 grow">
 						<img

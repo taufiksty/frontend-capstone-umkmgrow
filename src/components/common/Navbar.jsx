@@ -47,11 +47,13 @@ function Navbar() {
 	}
 
 	const error = useSelector((state) => state.auth.error);
-	if (error.status === 401) {
-		dispatch(fetchAPIFinish());
-		window.location.reload();
-	} else {
-		navigate('/servererror');
+	if (error) {
+		if (error.status === 401) {
+			dispatch(fetchAPIFinish());
+			window.location.reload();
+		} else {
+			navigate('/servererror');
+		}
 	}
 
 	const renderProfileButtons = () => {
@@ -162,7 +164,7 @@ function Navbar() {
 							Beranda
 						</li>
 					</Link>
-					<Link to="/class">
+					<Link to="/courses">
 						<li className="mx-4 my-4 md:my-0 md:mx-0 hover:text-[#008D91]">
 							Kelas
 						</li>

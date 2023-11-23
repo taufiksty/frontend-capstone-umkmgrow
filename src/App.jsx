@@ -4,6 +4,8 @@ import Daftar from './pages/Daftar';
 import Login from './pages/Login';
 import ErrorPage from './pages/Error';
 import { useSelector } from 'react-redux';
+import MenuKelas from './pages/MenuKelas';
+import DetailCourse from './pages/DetailCourse';
 
 function App() {
 	const authData = useSelector((state) => state.auth.data);
@@ -22,6 +24,14 @@ function App() {
 				<Route
 					path="/login"
 					element={authData ? <Navigate to="/" /> : <Login />}
+				/>
+				<Route
+					path="/courses"
+					element={<MenuKelas />}
+				/>
+				<Route
+					path="/courses/:id"
+					element={<DetailCourse />}
 				/>
 				<Route
 					path="/servererror"

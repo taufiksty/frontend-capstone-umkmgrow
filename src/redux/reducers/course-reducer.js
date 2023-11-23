@@ -1,5 +1,10 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { fetchAPI, fetchAPIError, fetchAPIFinish } from '../actions/course';
+import {
+	addCourses,
+	fetchAPI,
+	fetchAPIError,
+	fetchAPIFinish,
+} from '../actions/course';
 
 const initialState = {
 	data: {},
@@ -20,6 +25,9 @@ const courseReducer = createReducer(initialState, (builder) => {
 		.addCase(fetchAPIError, (state, action) => {
 			state.loading = false;
 			state.error = action.payload;
+		})
+		.addCase(addCourses, (state, action) => {
+			state.data = action.payload;
 		});
 });
 
