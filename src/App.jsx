@@ -1,8 +1,8 @@
-import ClassPage from "./features/class-page/ClassPage";
+import Certificate from "./features/certificate/Certificate";
 
 function App() {
   return (
-    <ClassPage />
+    <Certificate />
   );
 }
 
