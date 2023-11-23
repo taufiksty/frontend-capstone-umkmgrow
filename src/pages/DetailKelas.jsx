@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Footer from '../components/common/Footer';
 import Navbar from '../components/common/Navbar';
 import Button from '../components/common/Button';
@@ -14,12 +14,18 @@ function DetailKelas() {
 	const { id } = useParams();
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		dispatch(retrieveCourse({ id }));
 	}, [dispatch, id]);
 
 	const courseData = useSelector((state) => state.course.data);
+	const errorCourse = useSelector((state) => state.auth.error);
+
+	if (errorCourse) {
+		navigate('/servererror');
+	}
 
 	return (
 		<>
@@ -55,8 +61,14 @@ function DetailKelas() {
 						<h4>Jumlah Materi</h4>
 					</div>
 					<div className="my-3">
-						<p>{courseData.materials.length} Video Pembelajaran</p>
-						<p>{courseData.materials.length} Literasi Bacaan</p>
+						{Object.keys(courseData).length > 0 ? (
+							<>
+								<p>{courseData.materials.length} Video Pembelajaran</p>
+								<p>{courseData.materials.length} Literasi Bacaan</p>
+							</>
+						) : (
+							''
+						)}
 					</div>
 					<div className="flex items-center text-[#008D91] font-semibold my-2 space-x-3">
 						<IoTimeOutline size={20} />
@@ -79,7 +91,11 @@ function DetailKelas() {
 				<div className="border border-gray-400 my-2 p-5 rounded-lg ">
 					<div>
 						<h4 className="text-[#008D91] font-semibold mb-2">Persyaratan</h4>
-						<p>{courseData.terms.join(' ')}</p>
+						{Object.keys(courseData).length > 0 ? (
+							<p>{courseData.terms.join(' ')}</p>
+						) : (
+							''
+						)}
 					</div>
 				</div>
 			</div>
@@ -101,11 +117,14 @@ function DetailKelas() {
 						<h4 className="text-[#008D91] font-semibold mb-2">Materi</h4>
 						<p className="text-justify">
 							<ol>
-								{courseData.materials.map((m, i) => (
-									<li key={i + 1}>
-										{i + 1}. {m}
-									</li>
-								))}
+								{Object.keys(courseData).length > 0
+									? courseData.materials.map((m, i) => (
+											<li key={i + 1}>
+												{i + 1}. {m}
+											</li>
+											// eslint-disable-next-line no-mixed-spaces-and-tabs
+									  ))
+									: ''}
 							</ol>
 						</p>
 					</div>

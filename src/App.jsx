@@ -6,6 +6,7 @@ import ErrorPage from './pages/Error';
 import { useSelector } from 'react-redux';
 import MenuKelas from './pages/MenuKelas';
 import DetailKelas from './pages/DetailKelas';
+import Checkout from './pages/Checkout';
 
 function App() {
 	const authData = useSelector((state) => state.auth.data);
@@ -32,6 +33,10 @@ function App() {
 				<Route
 					path="/courses/:id"
 					element={<DetailKelas />}
+				/>
+				<Route
+					path="/checkout"
+					element={<Checkout />}
 				/>
 				<Route
 					path="/servererror"
