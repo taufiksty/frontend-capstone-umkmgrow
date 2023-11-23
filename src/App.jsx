@@ -1,8 +1,8 @@
-import Certificate from "./features/certificate/Certificate";
+import Checkout from "./features/checkoutpage/CheckoutPage";
 
 function App() {
   return (
-    <Certificate />
+    <Checkout />
   );
 }
 
