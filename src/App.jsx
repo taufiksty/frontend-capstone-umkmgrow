@@ -10,6 +10,7 @@ import Checkout from './pages/Checkout';
 
 function App() {
 	const authData = useSelector((state) => state.auth.data);
+	const isAuth = Object.keys(authData).length > 0;
 
 	return (
 		<BrowserRouter>
@@ -20,11 +21,11 @@ function App() {
 				/>
 				<Route
 					path="/signup"
-					element={authData ? <Navigate to="/" /> : <Daftar />}
+					element={isAuth ? <Navigate to="/" /> : <Daftar />}
 				/>
 				<Route
 					path="/login"
-					element={authData ? <Navigate to="/" /> : <Login />}
+					element={isAuth ? <Navigate to="/" /> : <Login />}
 				/>
 				<Route
 					path="/courses"
@@ -35,8 +36,8 @@ function App() {
 					element={<DetailKelas />}
 				/>
 				<Route
-					path="/checkout"
-					element={<Checkout />}
+					path="/checkout/:enrollId"
+					element={isAuth ? <Checkout /> : <Login />}
 				/>
 				<Route
 					path="/servererror"

@@ -4,40 +4,113 @@ import Navbar from '../components/common/Navbar';
 import Button from '../components/common/Button';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { retrieveCourse } from '../redux/actions/course';
-import { IoNewspaperOutline } from 'react-icons/io5';
-import { IoTimeOutline } from 'react-icons/io5';
-import { IoDocumentTextOutline } from 'react-icons/io5';
+import { enrollCourse, retrieveCourse } from '../redux/actions/course';
+import {
+	IoDocumentTextOutline,
+	IoTimeOutline,
+	IoNewspaperOutline,
+} from 'react-icons/io5';
 import { secondToHMString } from '../utils/time';
+import useToken from '../hooks/useToken';
+import { refreshUserEnrollments } from '../redux/actions/auth';
 
 function DetailKelas() {
 	const { id } = useParams();
+
+	const accessToken = useToken();
 
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		dispatch(retrieveCourse({ id }));
+		dispatch(retrieveCourse(id));
 	}, [dispatch, id]);
 
+	const enrollmentsUser = useSelector(
+		(state) => state.auth.data.user?.enrollments,
+	);
 	const courseData = useSelector((state) => state.course.data);
-	const errorCourse = useSelector((state) => state.auth.error);
+	const loading = useSelector((state) => state.course.loading);
+	const error = useSelector((state) => state.course.error);
 
-	if (errorCourse) {
+	if (error) {
 		navigate('/servererror');
 	}
+
+	const enrollment = enrollmentsUser?.find((enroll) => enroll.courseId === id);
+
+	function handleEnrollCourse(e) {
+		e.preventDefault();
+
+		if (!accessToken) navigate('/login?access=false');
+
+		dispatch(enrollCourse(accessToken, { courseId: id })).then((res) => {
+			if (res ? res.success : null) {
+				dispatch(refreshUserEnrollments(accessToken));
+				navigate(
+					`/checkout/${res.data.enrollment.id}?courseId=${id}&courseName=${courseData.courseName}&categories=${courseData.categoryPath}&price=${courseData.price}`,
+				);
+			}
+		});
+	}
+
+	if (error) {
+		console.log(error);
+		navigate('/servererror');
+	}
+
+	const renderBtnsAfterPurchase = (enrollment) =>
+		enrollment.status === 'onlearning' ? (
+			<Button className="w-fit">Mulai belajar</Button>
+		) : (
+			<>
+				<Button
+					className="w-fit"
+					variant="secondary">
+					Pelajari lagi
+				</Button>
+				<Button className="w-fit">Lihat sertifikat</Button>
+			</>
+		);
+
+	const renderBtnsAfterEnroll = (enrollment) =>
+		enrollment.status === 'onpayment' ? (
+			<Button
+				className="w-fit"
+				onClick={() =>
+					navigate(
+						`/checkout/${enrollment.id}?courseId=${id}&courseName=${courseData.courseName}&categories=${courseData.categoryPath}&price=${courseData.price}`,
+					)
+				}>
+				Lanjutkan checkout
+			</Button>
+		) : (
+			renderBtnsAfterPurchase(enrollment)
+		);
 
 	return (
 		<>
 			<Navbar />
 
-			<div className="bg-[#E5F2FA] md:px-[154px] px-4 pt-48 pb-20 flex flex-col-reverse space-y-3 md:justify-between md:items-center">
+			{/* <Hero> */}
+			<div className="bg-[#E5F2FA] md:px-[154px] px-4 pt-48 pb-20 flex flex-col-reverse md:flex-row space-y-3 md:justify-between md:items-center">
 				<div className="my-4 flex flex-col space-y-3">
 					<h1 className="font-bold text-4xl mb-2 leading-tight">
 						{courseData.courseName}
 					</h1>
 					<p>{courseData.courseDescription}</p>
-					<Button className="w-fit">Pilih kelas ini</Button>
+					{!enrollment ? (
+						<Button
+							className={`w-fit flex justify-center items-center ${
+								loading && 'opacity-60'
+							}`}
+							onClick={handleEnrollCourse}>
+							Pilih kelas ini
+							{loading && <i className="fa fa-circle-o-notch fa-spin ml-3"></i>}
+						</Button>
+					) : (
+						renderBtnsAfterEnroll(enrollment)
+					)}
 				</div>
 				<div>
 					<img
@@ -47,15 +120,56 @@ function DetailKelas() {
 					/>
 				</div>
 			</div>
+			{/* </Hero> */}
 
-			<div className="md:px-[154px] px-4 md:flex md:justify-between md:gap-6 mt-14 space-y-5">
-				<div className="border border-gray-400 my-2 p-5 rounded-lg basis-3/4">
-					<div>
-						<h4 className="text-[#008D91] font-semibold mb-2">Tentang Kelas</h4>
-						<p>{courseData.courseAbout}</p>
+			{/* <Detail> */}
+			<div className="md:px-[154px] px-4 md:flex md:justify-between md:gap-8 mt-14 space-y-5 md:space-y-2">
+				<div className="basis-3/4 space-y-5">
+					<div className="border border-gray-400 my-2 p-5 rounded-lg">
+						<div>
+							<h4 className="text-[#008D91] font-semibold mb-2">
+								Tentang Kelas
+							</h4>
+							<p>{courseData.courseAbout}</p>
+						</div>
+					</div>
+					<div className="border border-gray-400 my-2 p-5 rounded-lg ">
+						<div>
+							<h4 className="text-[#008D91] font-semibold mb-2">Persyaratan</h4>
+							{Object.keys(courseData).length > 0 ? (
+								<p>{courseData.terms.join(' ')}</p>
+							) : (
+								''
+							)}
+						</div>
+					</div>
+					<div className="border border-gray-400 my-2 p-5 rounded-lg ">
+						<div>
+							<h4 className="text-[#008D91] font-semibold mb-2">
+								Untuk Siapa Kelas Ini
+							</h4>
+							<p>{courseData.forWho}</p>
+						</div>
+					</div>
+					<div className="border border-gray-400 my-2 p-5 rounded-lg ">
+						<div>
+							<h4 className="text-[#008D91] font-semibold mb-2">Materi</h4>
+							<div className="text-justify">
+								<ol>
+									{Object.keys(courseData).length > 0
+										? courseData.materials.map((m, i) => (
+												<li key={m}>
+													{i + 1}. {m}
+												</li>
+												// eslint-disable-next-line no-mixed-spaces-and-tabs
+										  ))
+										: ''}
+								</ol>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div className="border border-gray-400 text-center my-2 p-5 rounded-lg basis-1/4">
+				<div className="border border-gray-400 text-center my-2 p-5 rounded-lg h-fit basis-1/4">
 					<div className="flex items-center text-[#008D91] font-semibold mb-2 space-x-3">
 						<IoNewspaperOutline size={20} />
 						<h4>Jumlah Materi</h4>
@@ -86,50 +200,7 @@ function DetailKelas() {
 					</div>
 				</div>
 			</div>
-
-			<div className="md:px-[154px] px-4 mt-4 md:max-w-[80%]">
-				<div className="border border-gray-400 my-2 p-5 rounded-lg ">
-					<div>
-						<h4 className="text-[#008D91] font-semibold mb-2">Persyaratan</h4>
-						{Object.keys(courseData).length > 0 ? (
-							<p>{courseData.terms.join(' ')}</p>
-						) : (
-							''
-						)}
-					</div>
-				</div>
-			</div>
-
-			<div className="md:px-[154px] px-4 mt-4 md:max-w-[80%]">
-				<div className="border border-gray-400 my-2 p-5 rounded-lg ">
-					<div>
-						<h4 className="text-[#008D91] font-semibold mb-2">
-							Untuk Siapa Kelas Ini
-						</h4>
-						<p>{courseData.forWho}</p>
-					</div>
-				</div>
-			</div>
-
-			<div className="md:px-[154px] px-4 mt-4 md:max-w-[80%]">
-				<div className="border border-gray-400 my-2 p-5 rounded-lg ">
-					<div>
-						<h4 className="text-[#008D91] font-semibold mb-2">Materi</h4>
-						<p className="text-justify">
-							<ol>
-								{Object.keys(courseData).length > 0
-									? courseData.materials.map((m, i) => (
-											<li key={i + 1}>
-												{i + 1}. {m}
-											</li>
-											// eslint-disable-next-line no-mixed-spaces-and-tabs
-									  ))
-									: ''}
-							</ol>
-						</p>
-					</div>
-				</div>
-			</div>
+			{/* </Detail> */}
 
 			<Footer />
 		</>
