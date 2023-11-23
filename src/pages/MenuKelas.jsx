@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 import Button from '../components/common/Button';
 import Footer from '../components/common/Footer';
 import { useDispatch, useSelector } from 'react-redux';
-import { retrieveCourses } from '../redux/actions/course';
+import { retrieveCourses } from '../redux/actions/courses';
 import { Link } from 'react-router-dom';
 
 function MenuKelas() {
@@ -17,20 +17,20 @@ function MenuKelas() {
 		dispatch(retrieveCourses({ category, search }));
 	}, [dispatch, category, search]);
 
-	const coursesData = useSelector((state) => state.course.data.courses);
+	const coursesData = useSelector((state) => state.courses.data);
 
 	const renderCourses = (dataCourses) => {
-		return dataCourses ? (
+		return Object.keys(dataCourses).length > 0 ? (
 			dataCourses.map((course, i) => (
 				<Link
 					key={course.id}
-					to={`/course/${course.id}`}>
+					to={`/courses/${course.id}`}>
 					<div
-						className={`flex gap-5 py-3 hover:bg-slate-100 cursor-pointer ${
+						className={`flex flex-col md:flex-row gap-5 py-3 hover:bg-slate-100 cursor-pointer ${
 							i === dataCourses.length - 1 ? '' : 'border-b border-zinc-300'
 						}`}>
 						<img
-							className="w-52 rounded-md"
+							className="w-full md:w-52 rounded-md"
 							src={course.imageCourse}
 							alt="imgCourse"
 						/>
