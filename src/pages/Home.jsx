@@ -15,8 +15,8 @@ function Home() {
 			<Navbar />
 
 			{/* <HeroSection> */}
-			<section className="bg-[#E5F2FA] md:px-[154px] px-4 pt-44 pb-24 flex flex-col md:flex-row md:justify-around md:items-center">
-				<div className="flex flex-col mb-16 md:mb-0 space-y-3 md:space-y-10">
+			<section className="bg-[#E5F2FA] md:px-[154px] px-4 pt-44 pb-24 flex flex-col-reverse md:flex-row md:justify-around md:items-center">
+				<div className="flex flex-col my-16 md:mb-0 space-y-3 md:space-y-10">
 					<h1 className="font-bold text-4xl mb-4 leading-tight">
 						Menumbuhkan UMKM <br /> Tangguh dengan <br />
 						Edukasi Berkualitas!
