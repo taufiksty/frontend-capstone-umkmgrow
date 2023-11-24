@@ -7,6 +7,8 @@ import { useSelector } from 'react-redux';
 import MenuKelas from './pages/MenuKelas';
 import DetailKelas from './pages/DetailKelas';
 import Checkout from './pages/Checkout';
+import ClassPage from './pages/ClassPage';
+import Exam from './pages/Exam';
 
 function App() {
 	const authData = useSelector((state) => state.auth.data);
@@ -36,8 +38,16 @@ function App() {
 					element={<DetailKelas />}
 				/>
 				<Route
+					path="/courses/:id/modules"
+					element={isAuth ? <ClassPage /> : <Login />}
+				/>
+				<Route
 					path="/checkout/:enrollId"
 					element={isAuth ? <Checkout /> : <Login />}
+				/>
+				<Route
+					path="/exam"
+					element={<Exam />}
 				/>
 				<Route
 					path="/servererror"

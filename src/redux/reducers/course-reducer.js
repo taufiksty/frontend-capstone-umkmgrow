@@ -1,13 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
 	addCourse,
+	addModule,
 	fetchAPI,
 	fetchAPIError,
 	fetchAPIFinish,
 } from '../actions/course';
 
+const data = localStorage.getItem('course')
+	? JSON.parse(localStorage.getItem('course'))
+	: {};
+
 const initialState = {
-	data: {},
+	data,
 	loading: false,
 	error: null,
 };
@@ -28,6 +33,11 @@ const courseReducer = createReducer(initialState, (builder) => {
 		})
 		.addCase(addCourse, (state, action) => {
 			state.data = action.payload;
+			localStorage.setItem('course', JSON.stringify(state.data));
+		})
+		.addCase(addModule, (state, action) => {
+			state.data = { ...state.data, modules: action.payload };
+			localStorage.setItem('course', JSON.stringify(state.data));
 		});
 });
 

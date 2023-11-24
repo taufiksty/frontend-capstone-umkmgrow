@@ -32,7 +32,10 @@ const useToken = () => {
 				const expiresIn = response.data.data.expiresIn;
 
 				setAccessToken(newAccessToken);
-				localStorage.setItem('auth', { ...auth, accessToken, expiresIn });
+				localStorage.setItem(
+					'auth',
+					JSON.stringify({ ...auth, accessToken: newAccessToken, expiresIn }),
+				);
 			} catch (error) {
 				console.error('Error refreshing token:', error.message);
 			}

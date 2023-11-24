@@ -454,6 +454,13 @@
   resolved "https://registry.npmjs.org/@remix-run/router/-/router-1.10.0.tgz"
   integrity sha512-Lm+fYpMfZoEucJ7cMxgt4dYt8jLfbpwRCzAjm9UgSLOkmlqo9gupxt6YX3DY0Fk155NT9l17d/ydi+964uS9Lw==
 
+"@szhsin/react-accordion@^1.2.3":
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/@szhsin/react-accordion/-/react-accordion-1.2.3.tgz#ee4d83c66a89748bfe2a2b23dd14bbb3d4f63fbf"
+  integrity sha512-KsDmaYsv4+Rnla+fSdZMIMonzuvXlDRPaFeIa7Je0dnwY4iFry5eiw27GQ6276+tYkVRgUyfS/mEcL48efSivA==
+  dependencies:
+    react-transition-state "^2.1.1"
+
 "@types/babel__core@^7.20.2":
   version "7.20.3"
   resolved "https://registry.npmjs.org/@types/babel__core/-/babel__core-7.20.3.tgz"
@@ -2147,6 +2154,11 @@ react-spinners@^0.13.8:
   version "0.13.8"
   resolved "https://registry.yarnpkg.com/react-spinners/-/react-spinners-0.13.8.tgz#5262571be0f745d86bbd49a1e6b49f9f9cb19acc"
   integrity sha512-3e+k56lUkPj0vb5NDXPVFAOkPC//XyhKPJjvcGjyMNPWsBKpplfeyialP74G7H7+It7KzhtET+MvGqbKgAqpZA==
+
+react-transition-state@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-transition-state/-/react-transition-state-2.1.1.tgz#1601a6177926b647041b7d598bf124321ab8d25b"
+  integrity sha512-kQx5g1FVu9knoz1T1WkapjUgFz08qQ/g1OmuWGi3/AoEFfS0kStxrPlZx81urjCXdz2d+1DqLpU6TyLW/Ro04Q==
 
 react@^18.2.0:
   version "18.2.0"

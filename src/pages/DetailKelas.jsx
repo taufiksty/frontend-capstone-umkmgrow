@@ -4,7 +4,11 @@ import Navbar from '../components/common/Navbar';
 import Button from '../components/common/Button';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { enrollCourse, retrieveCourse } from '../redux/actions/course';
+import {
+	enrollCourse,
+	retrieveCourse,
+	retrieveCourseModuleContent,
+} from '../redux/actions/course';
 import {
 	IoDocumentTextOutline,
 	IoTimeOutline,
@@ -22,13 +26,19 @@ function DetailKelas() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
-	useEffect(() => {
-		dispatch(retrieveCourse(id));
-	}, [dispatch, id]);
-
 	const enrollmentsUser = useSelector(
 		(state) => state.auth.data.user?.enrollments,
 	);
+	const enrollment = enrollmentsUser?.find((enroll) => enroll.courseId === id);
+
+	useEffect(() => {
+		if (enrollment) {
+			dispatch(retrieveCourseModuleContent(accessToken, id));
+		} else {
+			dispatch(retrieveCourse(id));
+		}
+	}, [accessToken, dispatch, enrollment, id]);
+
 	const courseData = useSelector((state) => state.course.data);
 	const loading = useSelector((state) => state.course.loading);
 	const error = useSelector((state) => state.course.error);
@@ -36,8 +46,6 @@ function DetailKelas() {
 	if (error) {
 		navigate('/servererror');
 	}
-
-	const enrollment = enrollmentsUser?.find((enroll) => enroll.courseId === id);
 
 	function handleEnrollCourse(e) {
 		e.preventDefault();
@@ -54,6 +62,14 @@ function DetailKelas() {
 		});
 	}
 
+	function handleStartLearn(e) {
+		e.preventDefault();
+
+		navigate(
+			`/courses/${id}/modules?moduleId=${courseData.modules[0].id}&contentId=${courseData.modules[0].contents[0].id}`,
+		);
+	}
+
 	if (error) {
 		console.log(error);
 		navigate('/servererror');
@@ -61,7 +77,11 @@ function DetailKelas() {
 
 	const renderBtnsAfterPurchase = (enrollment) =>
 		enrollment.status === 'onlearning' ? (
-			<Button className="w-fit">Mulai belajar</Button>
+			<Button
+				className="w-fit"
+				onClick={handleStartLearn}>
+				Mulai belajar
+			</Button>
 		) : (
 			<>
 				<Button
