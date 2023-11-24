@@ -49,6 +49,7 @@ const authReducer = createReducer(initialState, (builder) => {
 		})
 		.addCase(removeAuth, (state) => {
 			localStorage.removeItem('auth');
+			localStorage.removeItem('course');
 			state.data = {};
 		});
 });
