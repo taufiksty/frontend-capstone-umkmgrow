@@ -1,12 +1,61 @@
-import LandingPage from "./pages/landing-page/LandingPage";
-import Profile from "./pages/profile/Profile";
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import LandingPage from '@/pages/Home';
+import Daftar from './pages/Daftar';
+import Login from './pages/Login';
+import ErrorPage from './pages/Error';
+import { useSelector } from 'react-redux';
+import MenuKelas from './pages/MenuKelas';
+import DetailKelas from './pages/DetailKelas';
+import Checkout from './pages/Checkout';
+import ClassPage from './pages/ClassPage';
+import Exam from './pages/Exam';
 
 function App() {
-  return (
-    <>
-      <Profile />
-    </>
-  );
+	const authData = useSelector((state) => state.auth.data);
+	const isAuth = Object.keys(authData).length > 0;
+
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route
+					path="/"
+					element={<LandingPage />}
+				/>
+				<Route
+					path="/signup"
+					element={isAuth ? <Navigate to="/" /> : <Daftar />}
+				/>
+				<Route
+					path="/login"
+					element={isAuth ? <Navigate to="/" /> : <Login />}
+				/>
+				<Route
+					path="/courses"
+					element={<MenuKelas />}
+				/>
+				<Route
+					path="/courses/:id"
+					element={<DetailKelas />}
+				/>
+				<Route
+					path="/courses/:id/modules"
+					element={isAuth ? <ClassPage /> : <Login />}
+				/>
+				<Route
+					path="/checkout/:enrollId"
+					element={isAuth ? <Checkout /> : <Login />}
+				/>
+				<Route
+					path="/exam"
+					element={<Exam />}
+				/>
+				<Route
+					path="/servererror"
+					element={<ErrorPage />}
+				/>
+			</Routes>
+		</BrowserRouter>
+	);
 }
 
 export default App;
