@@ -1,7 +1,7 @@
 import Footer from '../components/common/Footer';
 import Navbar from '../components/common/Navbar';
 import Button from '../components/common/Button';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Accordion, AccordionItem } from '@szhsin/react-accordion';
 
@@ -19,6 +19,7 @@ function ClassPage() {
 	const content = module?.contents.find((c) => c.id === contentId);
 
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	function handlePrevContent(e) {
 		e.preventDefault();
@@ -48,7 +49,8 @@ function ClassPage() {
 		const isLastContent = content.contentSequence === lenContents;
 
 		if (isLastModule) {
-			navigate(`/exam`);
+			dispatch();
+			navigate(`/courses/${id}/exams?=`);
 		} else if (isLastContent) {
 			const moduleNext = modulesData[module.moduleSequence];
 			const nextContentOnModuleNextId = moduleNext.contents[0].id;

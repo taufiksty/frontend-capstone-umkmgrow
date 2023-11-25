@@ -46,8 +46,8 @@ function App() {
 					element={isAuth ? <Checkout /> : <Login />}
 				/>
 				<Route
-					path="/exam"
-					element={<Exam />}
+					path="/courses/:id/exams"
+					element={isAuth ? <Exam /> : <Login />}
 				/>
 				<Route
 					path="/servererror"

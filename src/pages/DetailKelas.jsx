@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import Footer from '../components/common/Footer';
 import Navbar from '../components/common/Navbar';
 import Button from '../components/common/Button';
@@ -17,6 +17,7 @@ import {
 import { secondToHMString } from '../utils/time';
 import useToken from '../hooks/useToken';
 import { refreshUserEnrollments } from '../redux/actions/auth';
+import Swal from 'sweetalert2';
 
 function DetailKelas() {
 	const { id } = useParams();
@@ -73,6 +74,18 @@ function DetailKelas() {
 	if (error) {
 		console.log(error);
 		navigate('/servererror');
+	}
+
+	const { search } = useLocation();
+	const queryParams = new URLSearchParams(search);
+	if (queryParams.get('access') === 'false') {
+		Swal.fire({
+			position: 'center',
+			icon: 'info',
+			title: 'Kamu checkout dulu, yah!',
+			showConfirmButton: false,
+			timer: 1500,
+		}).then(() => navigate(`/courses/${id}`, { replace: true }));
 	}
 
 	const renderBtnsAfterPurchase = (enrollment) =>

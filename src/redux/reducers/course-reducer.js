@@ -1,6 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import {
 	addCourse,
+	addExam,
 	addModule,
 	fetchAPI,
 	fetchAPIError,
@@ -37,6 +38,10 @@ const courseReducer = createReducer(initialState, (builder) => {
 		})
 		.addCase(addModule, (state, action) => {
 			state.data = { ...state.data, modules: action.payload };
+			localStorage.setItem('course', JSON.stringify(state.data));
+		})
+		.addCase(addExam, (state, action) => {
+			state.data = { ...state.data, exams: action.payload };
 			localStorage.setItem('course', JSON.stringify(state.data));
 		});
 });
