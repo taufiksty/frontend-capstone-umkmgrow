@@ -6,6 +6,8 @@ import {
 	fetchAPIFinish,
 	refreshAuth,
 	refreshDataUser,
+	refreshDataUserEnrollments,
+	refreshDataUserExamHistories,
 	removeAuth,
 } from '../actions/auth';
 
@@ -41,9 +43,20 @@ const authReducer = createReducer(initialState, (builder) => {
 			state.data = { ...state.data, accessToken: action.payload };
 		})
 		.addCase(refreshDataUser, (state, action) => {
+			state.data = { ...state.data, user: action.payload };
+			localStorage.setItem('auth', JSON.stringify(state.data));
+		})
+		.addCase(refreshDataUserEnrollments, (state, action) => {
 			state.data = {
 				...state.data,
 				user: { ...state.data.user, enrollments: action.payload },
+			};
+			localStorage.setItem('auth', JSON.stringify(state.data));
+		})
+		.addCase(refreshDataUserExamHistories, (state, action) => {
+			state.data = {
+				...state.data,
+				user: { ...state.data.user, examHistories: action.payload },
 			};
 			localStorage.setItem('auth', JSON.stringify(state.data));
 		})

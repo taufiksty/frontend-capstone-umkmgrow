@@ -17,6 +17,8 @@ export const retrieveCourse = (id) => {
 
 			dispatch(fetchAPIFinish());
 			dispatch(addCourse(response.data.data.course));
+
+			return response.data;
 		} catch (error) {
 			dispatch(fetchAPIError(error.message));
 		}
@@ -52,6 +54,25 @@ export const retrieveCourseExams = (token, id) => {
 			});
 			dispatch(fetchAPIFinish());
 			dispatch(addExam(response.data.data.course.exams));
+
+			return response.data;
+		} catch (error) {
+			dispatch(fetchAPIError());
+		}
+	};
+};
+
+export const retrieveCourseExamHistory = (token, id) => {
+	return async (dispatch) => {
+		dispatch(fetchAPI());
+
+		try {
+			const response = await axios.get(`/api/courses/${id}/exams/history`, {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			dispatch(fetchAPIFinish());
+
+			return response.data;
 		} catch (error) {
 			dispatch(fetchAPIError());
 		}

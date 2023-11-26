@@ -4,6 +4,12 @@ import { createAction } from '@reduxjs/toolkit';
 export const addAuth = createAction('AUTH/ADD');
 export const refreshAuth = createAction('AUTH/REFRESH');
 export const refreshDataUser = createAction('AUTH/REFRESH_DATA_USER');
+export const refreshDataUserEnrollments = createAction(
+	'AUTH/REFRESH_DATA_USER_ENROLLMENTS',
+);
+export const refreshDataUserExamHistories = createAction(
+	'AUTH/REFRESH_DATA_USER_EXAM_HISTORIES',
+);
 export const removeAuth = createAction('AUTH/REMOVE');
 export const fetchAPI = createAction('AUTH/FETCH');
 export const fetchAPIFinish = createAction('AUTH/FETCH_FINISH');
@@ -58,6 +64,26 @@ export const signOut = (token) => {
 	};
 };
 
+export const updateUser = (token, id, body) => {
+	return async (dispatch) => {
+		dispatch(fetchAPI());
+
+		try {
+			const response = await axios.put(`/api/users/${id}`, body, {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+
+			dispatch(refreshDataUser(response.data.data.user));
+			dispatch(fetchAPIFinish());
+
+			return response.data;
+		} catch (error) {
+			console.log(error);
+			dispatch(fetchAPIError());
+		}
+	};
+};
+
 export const refreshUserEnrollments = (token) => {
 	return async (dispatch) => {
 		dispatch(fetchAPI());
@@ -67,10 +93,26 @@ export const refreshUserEnrollments = (token) => {
 				headers: { Authorization: `Bearer ${token}` },
 			});
 
-			dispatch(refreshDataUser(response.data.data.enrollments));
+			dispatch(refreshDataUserEnrollments(response.data.data.enrollments));
 			dispatch(fetchAPIFinish());
 		} catch (error) {
 			dispatch(fetchAPIError(error.message));
+		}
+	};
+};
+
+export const refreshUserExamHistory = (token) => {
+	return async (dispatch) => {
+		dispatch(fetchAPI());
+
+		try {
+			const response = await axios.get('/api/exams/histories', {
+				headers: { Authorization: `Bearer ${token}` },
+			});
+			dispatch(refreshDataUserExamHistories(response.data.data.examHistories));
+			dispatch(fetchAPIFinish());
+		} catch (error) {
+			dispatch(fetchAPIError());
 		}
 	};
 };
