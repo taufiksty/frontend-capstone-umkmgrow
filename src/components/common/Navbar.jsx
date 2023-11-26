@@ -25,7 +25,7 @@ function Navbar({ variant = 'primary' }) {
 
 	useEffect(() => {
 		const closeProfileOrNavbarOutsideClick = (event) => {
-			if (!profileRef.current.contains(event.target)) {
+			if (!profileRef.current?.contains(event.target)) {
 				setOpenMenuProfile(false);
 			}
 			if (!navRef.current.contains(event.target)) {
@@ -73,6 +73,9 @@ function Navbar({ variant = 'primary' }) {
 		);
 	};
 
+	const imageIfUserNotHave =
+		authData?.gender === 'male' ? ImgMaleProfile : ImgFemaleProfile;
+
 	const renderProfileImage = () => {
 		return (
 			<div
@@ -82,9 +85,7 @@ function Navbar({ variant = 'primary' }) {
 				<img
 					ref={profileRef}
 					src={
-						authData.imageProfile || authData.gender === 'male'
-							? ImgMaleProfile
-							: ImgFemaleProfile
+						authData.imageProfile ? authData.imageProfile : imageIfUserNotHave
 					}
 					alt="profile"
 					className="w-20 rounded-full hover:scale-105 cursor-pointer"
@@ -128,7 +129,7 @@ function Navbar({ variant = 'primary' }) {
 
 	return (
 		<nav
-			className={`flex flex-col md:flex-row md:items-center md:justify-between ${
+			className={`z-10 flex flex-col md:flex-row md:items-center md:justify-between ${
 				variant === 'primary' ? 'bg-[#E5F2FA]' : 'bg-white'
 			} md:px-[154px] md:py-4 border-b border-b-slate-300  fixed w-full shadow-md`}>
 			<div

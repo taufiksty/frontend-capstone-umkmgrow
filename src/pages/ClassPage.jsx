@@ -4,11 +4,17 @@ import Button from '../components/common/Button';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { Accordion, AccordionItem } from '@szhsin/react-accordion';
+import { retrieveCourseExams } from '../redux/actions/course';
+import useToken from '../hooks/useToken';
+import { useEffect } from 'react';
+import Swal from 'sweetalert2';
 
 function ClassPage() {
 	const { id } = useParams();
 	const { search } = useLocation();
 	const queryParams = new URLSearchParams(search);
+
+	const accessToken = useToken();
 
 	const moduleId = queryParams.get('moduleId');
 	const contentId = queryParams.get('contentId');
@@ -20,6 +26,15 @@ function ClassPage() {
 
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+
+	const enrollmentsUser = useSelector(
+		(state) => state.auth.data.user?.enrollments,
+	);
+	const enrollment = enrollmentsUser?.find((enroll) => enroll.courseId === id);
+
+	useEffect(() => {
+		if (!enrollment) navigate(`/courses/${id}?access=false`);
+	}, [enrollment, id, navigate]);
 
 	function handlePrevContent(e) {
 		e.preventDefault();
@@ -49,8 +64,27 @@ function ClassPage() {
 		const isLastContent = content.contentSequence === lenContents;
 
 		if (isLastModule) {
-			dispatch();
-			navigate(`/courses/${id}/exams?=`);
+			Swal.fire({
+				icon: 'info',
+				title: 'Ujian',
+				text: 'Selanjutnya kamu akan mengerjakan ujian, apakah kamu sudah siap?',
+				showDenyButton: true,
+				position: 'center',
+				confirmButtonColor: '#008D91',
+				denyButtonColor: 'gray',
+				confirmButtonText: 'Ya, siap',
+				denyButtonText: `Nanti deh`,
+			}).then((result) => {
+				if (result.isConfirmed) {
+					dispatch(retrieveCourseExams(accessToken, id)).then((res) =>
+						navigate(
+							`/courses/${id}/exams?questionId=${res.data.course.exams.questions[0].id}`,
+						),
+					);
+				} else if (result.isDenied) {
+					Swal.close();
+				}
+			});
 		} else if (isLastContent) {
 			const moduleNext = modulesData[module.moduleSequence];
 			const nextContentOnModuleNextId = moduleNext.contents[0].id;

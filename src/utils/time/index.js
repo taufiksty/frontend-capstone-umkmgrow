@@ -5,4 +5,19 @@ const secondToHMString = (seconds) => {
 	return `${hours} jam ${minutes ? minutes + ' menit' : ''}`;
 };
 
-export { secondToHMString };
+const timedateToLocale = (date) => {
+	const inputDate = new Date(date);
+
+	const options = {
+		weekday: 'long',
+		day: 'numeric',
+		month: 'long',
+		year: 'numeric',
+		hour: 'numeric',
+		minute: 'numeric',
+	};
+
+	return inputDate.toLocaleString('id-ID', options);
+};
+
+export { secondToHMString, timedateToLocale };

@@ -9,6 +9,8 @@ import DetailKelas from './pages/DetailKelas';
 import Checkout from './pages/Checkout';
 import ClassPage from './pages/ClassPage';
 import Exam from './pages/Exam';
+import Profile from './pages/Profile';
+import ExamHistory from './pages/ExamHistory';
 
 function App() {
 	const authData = useSelector((state) => state.auth.data);
@@ -30,6 +32,10 @@ function App() {
 					element={isAuth ? <Navigate to="/" /> : <Login />}
 				/>
 				<Route
+					path="/profile"
+					element={isAuth ? <Profile /> : <Login />}
+				/>
+				<Route
 					path="/courses"
 					element={<MenuKelas />}
 				/>
@@ -48,6 +54,10 @@ function App() {
 				<Route
 					path="/courses/:id/exams"
 					element={isAuth ? <Exam /> : <Login />}
+				/>
+				<Route
+					path="/courses/:id/exams/history"
+					element={isAuth ? <ExamHistory /> : <Login />}
 				/>
 				<Route
 					path="/servererror"
