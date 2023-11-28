@@ -4,9 +4,10 @@ import Card2 from '@/assets/images/home/bro.png';
 import Card3 from '@/assets/images/home/amico.png';
 import Tentang1 from '@/assets/images/home/what.png';
 import Tentang2 from '@/assets/images/home/tentang2.png';
-import Card from '@/components/home/Card';
-import Navbar from '@/components/common/Navbar';
-import Footer from '@/components/common/Footer';
+import Button from '../components/common/Button';
+import Card from '../components/home/Card';
+import Navbar from '../components/common/Navbar';
+import Footer from '../components/common/Footer';
 import { Link } from 'react-router-dom';
 
 function Home() {
@@ -26,9 +27,7 @@ function Home() {
 						Anda.
 					</p>
 					<Link to="/courses">
-						<button className="px-2 py-1 border-2 self-start border-[#008D91] rounded-md bg-[#008D91] text-white mt-6 hover:font-semibold">
-							Ambil Kelas
-						</button>
+						<Button>Ambil Kelas</Button>
 					</Link>
 				</div>
 				<div className="flex justify-center">

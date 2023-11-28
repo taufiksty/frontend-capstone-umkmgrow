@@ -71,11 +71,6 @@ function DetailKelas() {
 		);
 	}
 
-	if (error) {
-		console.log(error);
-		navigate('/servererror');
-	}
-
 	const { search } = useLocation();
 	const queryParams = new URLSearchParams(search);
 	if (queryParams.get('access') === 'false') {
@@ -102,7 +97,15 @@ function DetailKelas() {
 					variant="secondary">
 					Pelajari lagi
 				</Button>
-				<Button className="w-fit">Lihat sertifikat</Button>
+				<Button
+					className="w-fit"
+					onClick={() =>
+						navigate(
+							`/courses/${id}/certification?courseName=${courseData.courseName}`,
+						)
+					}>
+					Lihat sertifikat
+				</Button>
 			</>
 		);
 

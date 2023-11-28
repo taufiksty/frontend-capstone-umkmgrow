@@ -2,14 +2,14 @@ import Footer from '../components/common/Footer';
 import Navbar from '../components/common/Navbar';
 import Button from '../components/common/Button';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { Accordion, AccordionItem } from '@szhsin/react-accordion';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { retrieveCourseExams } from '../redux/actions/course';
 import useToken from '../hooks/useToken';
 import { useEffect } from 'react';
 import Swal from 'sweetalert2';
+import AccordionModules from '../components/class/AccordionModules';
 
-function ClassPage() {
+function Class() {
 	const { id } = useParams();
 	const { search } = useLocation();
 	const queryParams = new URLSearchParams(search);
@@ -150,30 +150,10 @@ function ClassPage() {
 					<div
 						id="list-materi"
 						className="my-[34px] rounded-[10px] border border-slate-300 md:h-fit md:basis-1/4">
-						<Accordion
-							allowMultiple
-							className="p-3 md:p-5 md:text-xl space-y-3">
-							{modulesData.map((module, i) => (
-								<AccordionItem
-									key={module.id}
-									header={`Bagian ${module.moduleSequence} : ${module.moduleName}`}
-									className={`text-left space-y-3 ${
-										modulesData.length - 1 !== i &&
-										'border-b pb-3 border-slate-300'
-									}`}>
-									{module.contents.map((content, i) => (
-										<Link
-											to={`/courses/${id}/modules?moduleId=${module.id}&contentId=${content.id}`}
-											key={content.id}
-											className="text-blue-500 underline mt-3 ml-7 md:ml-0 text-md md:text-xl hover:opacity-70">
-											<p>
-												{i + 1}. {content.contentDescription}
-											</p>
-										</Link>
-									))}
-								</AccordionItem>
-							))}
-						</Accordion>
+						<AccordionModules
+							courseId={id}
+							modulesData={modulesData}
+						/>
 					</div>
 				</div>
 			</main>
@@ -183,4 +163,4 @@ function ClassPage() {
 	);
 }
 
-export default ClassPage;
+export default Class;

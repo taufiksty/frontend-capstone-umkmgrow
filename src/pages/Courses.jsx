@@ -4,9 +4,9 @@ import Button from '../components/common/Button';
 import Footer from '../components/common/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { retrieveCourses } from '../redux/actions/courses';
-import { Link } from 'react-router-dom';
+import CourseItem from '../components/courses/CourseItem';
 
-function MenuKelas() {
+function Courses() {
 	const [search, setSearch] = useState('');
 	const [category, setCategory] = useState('');
 
@@ -22,28 +22,17 @@ function MenuKelas() {
 	const renderCourses = (dataCourses) => {
 		return Object.keys(dataCourses).length > 0 ? (
 			dataCourses.map((course, i) => (
-				<Link
+				<CourseItem
 					key={course.id}
-					to={`/courses/${course.id}`}>
-					<div
-						className={`flex flex-col md:flex-row gap-5 py-3 hover:bg-slate-100 cursor-pointer ${
-							i === dataCourses.length - 1 ? '' : 'border-b border-zinc-300'
-						}`}>
-						<img
-							className="w-full md:w-52 rounded-md"
-							src={course.imageCourse}
-							alt="imgCourse"
-						/>
-						<div>
-							<h4 className="font-semibold">{course.courseName}</h4>
-							<p className="text-[14px]">{course.courseDescription}</p>
-						</div>
-						<h4 className="text-red-600 ml-auto">{course.price || 'Gratis'}</h4>
-					</div>
-				</Link>
+					courses={dataCourses}
+					course={course}
+					i={i}
+				/>
 			))
 		) : (
-			<div></div>
+			<div className="flex justify-center items-center">
+				<i className="fa fa-circle-o-notch fa-spin ml-3"></i>
+			</div>
 		);
 	};
 	return (
@@ -127,4 +116,4 @@ function MenuKelas() {
 	);
 }
 
-export default MenuKelas;
+export default Courses;

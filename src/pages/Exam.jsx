@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { retrieveCourseExams, submitExam } from '../redux/actions/course';
 import useToken from '../hooks/useToken';
 import Swal from 'sweetalert2';
+import { refreshUserEnrollments } from '../redux/actions/auth';
+import Answer from '../components/exam/Answer';
 
 function Exam() {
 	const { id } = useParams();
@@ -67,46 +69,73 @@ function Exam() {
 		navigate(`/courses/${id}/exams?questionId=${nextQuestionId}`);
 	}
 
+	function showIcncompleteAnswerAlert() {
+		return Swal.fire({
+			position: 'center',
+			icon: 'info',
+			title: 'Kamu belum mengisi semua soal!',
+			showConfirmButton: false,
+			timer: 1500,
+		});
+	}
+
+	async function showConfirmationDialog() {
+		const result = await Swal.fire({
+			icon: 'warning',
+			title: 'Kamu sudah yakin?',
+			text: 'Setelah menyelesaikan, kamu bisa melihat nilai dan hasilnya. Perlu diingat, sertifikat diberikan apabila nilaimu 100. Tenang, kamu bisa memperbaikinya nanti.',
+			showDenyButton: true,
+			position: 'center',
+			confirmButtonColor: '#008D91',
+			confirmButtonText: 'Ya, kumpulkan',
+			denyButtonText: `Nanti deh`,
+		});
+
+		return handleConfirmationResult(result);
+	}
+
+	function handleConfirmationResult(result) {
+		if (result.isConfirmed) {
+			const score = calculateScore();
+			submitExamAndUpdateEnrollments(score);
+		} else if (result.isDenied) {
+			Swal.close();
+		}
+	}
+
+	function calculateScore() {
+		let score = 0;
+		Object.keys(answers).forEach((a, i) => {
+			if (exams?.questions[i].correctAnswer === answers[a]) {
+				score += 10;
+			}
+		});
+
+		return score;
+	}
+
+	function submitExamAndUpdateEnrollments(score) {
+		return dispatch(submitExam(accessToken, id, { score, answers })).then(
+			(res) => {
+				if (score === 100) {
+					dispatch(refreshUserEnrollments(accessToken));
+				}
+				if (res.success) {
+					navigate('/profile?section=exam-history');
+				}
+			},
+		);
+	}
+
 	function handleFinishExam(e) {
 		e.preventDefault();
 
 		const arrAnswers = Object.keys(answers);
 
 		if (arrAnswers.length !== 10) {
-			Swal.fire({
-				position: 'center',
-				icon: 'info',
-				title: 'Kamu belum mengisi semua soal!',
-				showConfirmButton: false,
-				timer: 1500,
-			});
+			showIcncompleteAnswerAlert();
 		} else {
-			Swal.fire({
-				icon: 'warning',
-				title: 'Kamu sudah yakin?',
-				text: 'Setelah menyelesaikan, kamu bisa melihat nilai dan hasilnya. Perlu diingat, sertifikat diberikan apabila nilaimu 100. Tenang, kamu bisa memperbaikinya nanti.',
-				showDenyButton: true,
-				position: 'center',
-				confirmButtonColor: '#008D91',
-				confirmButtonText: 'Ya, kumpulkan',
-				denyButtonText: `Nanti deh`,
-			}).then((result) => {
-				if (result.isConfirmed) {
-					let score = 0;
-					Object.keys(answers).forEach((a, i) => {
-						if (exams?.questions[i].correctAnswer === answers[a]) {
-							score += 10;
-						}
-					});
-					dispatch(submitExam(accessToken, id, { score, answers })).then(
-						(res) => {
-							if (res.success) navigate('/profile?section=exam-history');
-						},
-					);
-				} else if (result.isDenied) {
-					Swal.close();
-				}
-			});
+			showConfirmationDialog();
 		}
 	}
 
@@ -140,20 +169,20 @@ function Exam() {
 									id="answers"
 									className="flex flex-col space-y-3 md:space-y-4 mt-3 md:mt-5">
 									{Object.keys(question.answers).map((a) => (
-										<div
+										<Answer
 											key={a}
+											isAnswerSelected={
+												answers[question.questionSequence] === a
+											}
+											currentAnswer={a}
 											onClick={() =>
 												setAnswers({
 													...answers,
 													[question.questionSequence]: a,
 												})
-											}
-											className={`flex space-x-2 text-[12px] md:text-2xl border border-[#D9D9D9] ${
-												answers[question.questionSequence] === a &&
-												'bg-[#D9D9D9]'
-											} py-2 px-3 md:px-6 rounded-xl cursor-pointer hover:opacity-75 hover:bg-slate-100`}>
-											<div>{a.toUpperCase()}.</div> <p>{question.answers[a]}</p>
-										</div>
+											}>
+											{question.answers[a]}
+										</Answer>
 									))}
 								</div>
 							</div>

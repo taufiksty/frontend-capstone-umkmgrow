@@ -3,8 +3,9 @@ import ImgMaleProfile from '@/assets/images/common/male.png';
 import ImgFemaleProfile from '@/assets/images/common/female.png';
 import { useEffect, useState } from 'react';
 import Button from '../../components/common/Button';
-import { updateUser } from '../../redux/actions/auth';
+import { fetchAPIFinish, updateUser } from '../../redux/actions/auth';
 import useToken from '../../hooks/useToken';
+import Swal from 'sweetalert2';
 
 function FormProfile() {
 	const [modeUpdate, setModeUpdate] = useState(false);
@@ -37,8 +38,6 @@ function FormProfile() {
 		setUpdateData(() => updatedData);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [userData]);
-
-	console.log(updateData);
 
 	function handlePhoneKeyDown(e) {
 		const allowedKeys = [
@@ -91,15 +90,30 @@ function FormProfile() {
 		});
 
 		dispatch(updateUser(accessToken, userData.id, formData)).then((res) => {
-			if (res.success) {
+			if (res?.success) {
 				setModeUpdate(false);
 				window.location.reload();
+			} else if (!res?.success) {
+				Swal.fire({
+					title: 'Periksa lagi, ya!',
+					text: 'Sepertinya ada input yang salah.',
+					icon: 'error',
+					confirmButtonColor: '#008D91',
+				}).then(() => dispatch(fetchAPIFinish()));
 			}
 		});
 	}
 
 	const renderIfImageNull =
 		updateData.gender === 'male' ? ImgMaleProfile : ImgFemaleProfile;
+
+	if (!updateData.email) {
+		return (
+			<div className="flex justify-center items-center h-screen">
+				<i className="fa fa-circle-o-notch fa-spin ml-3"></i>
+			</div>
+		);
+	}
 
 	return (
 		<div className="mt-10 md:mt-0">

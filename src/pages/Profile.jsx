@@ -8,7 +8,6 @@ import { useLocation, useNavigate } from 'react-router';
 function Profile() {
 	const { search } = useLocation();
 	const queryParams = new URLSearchParams(search);
-
 	const section = queryParams.get('section');
 
 	const navigate = useNavigate();

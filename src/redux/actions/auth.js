@@ -78,7 +78,6 @@ export const updateUser = (token, id, body) => {
 
 			return response.data;
 		} catch (error) {
-			console.log(error);
 			dispatch(fetchAPIError());
 		}
 	};
@@ -112,7 +111,7 @@ export const refreshUserExamHistory = (token) => {
 			dispatch(refreshDataUserExamHistories(response.data.data.examHistories));
 			dispatch(fetchAPIFinish());
 		} catch (error) {
-			dispatch(fetchAPIError());
+			dispatch(fetchAPIError(error.message));
 		}
 	};
 };

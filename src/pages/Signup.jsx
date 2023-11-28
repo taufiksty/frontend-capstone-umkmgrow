@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { fetchAPIFinish, signUp } from '../redux/actions/auth';
-import ErrorPage from './Error';
 
 function Daftar() {
 	const [input, setInput] = useState({ fullname: '', email: '', password: '' });
@@ -42,7 +41,7 @@ function Daftar() {
 				confirmButtonColor: '#008D91',
 			}).then(() => dispatch(fetchAPIFinish()));
 		} else {
-			return <ErrorPage />;
+			navigate('/servererror');
 		}
 	}
 

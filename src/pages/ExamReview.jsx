@@ -6,8 +6,10 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { retrieveCourseExamHistory } from '../redux/actions/course';
 import useToken from '../hooks/useToken';
+import AnswerReview from '../components/exam-review/AnswerReview';
+import QuestionNav from '../components/exam-review/QuestionNav';
 
-function ExamHistory() {
+function ExamReview() {
 	const { id } = useParams();
 	const { search } = useLocation();
 	const queryParams = new URLSearchParams(search);
@@ -71,9 +73,6 @@ function ExamHistory() {
 		);
 	}
 
-	const styleFalseAnswer = (a) =>
-		question.yourAnswer === a ? 'bg-[#f4745e]' : 'bg-white';
-
 	return (
 		<>
 			<Navbar variant="secondary" />
@@ -89,6 +88,7 @@ function ExamHistory() {
 				</div>
 
 				<div className="md:flex md:space-x-[36px]">
+					{/* <MainQuestion> */}
 					<div className="md:basis-3/4">
 						<div className="mt-[34px] rounded-xl border border-black px-4 py-5 md:p-8 flex space-x-2 md:space-x-4">
 							<div className="text-[12px] md:text-2xl">
@@ -104,15 +104,13 @@ function ExamHistory() {
 									id="answers"
 									className="flex flex-col space-y-3 md:space-y-4 mt-3 md:mt-5">
 									{Object.keys(question.answers).map((a) => (
-										<div
+										<AnswerReview
 											key={a}
-											className={`flex space-x-2 text-[12px] md:text-2xl border border-[#D9D9D9] ${
-												question.correctAnswer === a
-													? 'bg-[#5EEA6C]'
-													: styleFalseAnswer(a)
-											} py-2 px-3 md:px-6 rounded-xl`}>
-											<div>{a.toUpperCase()}.</div> <p>{question.answers[a]}</p>
-										</div>
+											currentAnswer={a}
+											yourAnswer={question.yourAnswer}
+											correctAnswer={question.correctAnswer}>
+											{question.answers[a]}
+										</AnswerReview>
 									))}
 								</div>
 							</div>
@@ -142,12 +140,14 @@ function ExamHistory() {
 							)}
 						</div>
 					</div>
+					{/* </MainQuestion> */}
 
+					{/* <ListQuestion> */}
 					<div
 						id="list-question"
 						className="my-[34px] rounded-[10px] border border-zinc-700 md:h-fit md:basis-1/4 grid grid-cols-5 gap-8 p-5 md:p-8">
 						{questions.map((q) => (
-							<div
+							<QuestionNav
 								key={q.questionSequence}
 								onClick={() =>
 									navigate(
@@ -156,15 +156,12 @@ function ExamHistory() {
 										}`,
 									)
 								}
-								className={`${
-									q.correctAnswer === q.yourAnswer
-										? 'bg-[#5EEA6C]'
-										: 'bg-[#f4745e]'
-								} border border-black border-opacity-30 cursor-pointer w-fit py-2 px-5 rounded-xl`}>
+								isAnswerCorrect={q.correctAnswer === q.yourAnswer}>
 								{q.questionSequence}
-							</div>
+							</QuestionNav>
 						))}
 					</div>
+					{/* </ListQuestion> */}
 				</div>
 			</main>
 
@@ -173,4 +170,4 @@ function ExamHistory() {
 	);
 }
 
-export default ExamHistory;
+export default ExamReview;
