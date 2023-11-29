@@ -12,9 +12,9 @@ export const retrieveCourses = ({ category, search }) => {
 
 		try {
 			const response = await axios.get(
-				`/api/courses?${category && 'category=' + category}&${
-					search && 'search=' + search
-				}`,
+				`http://18.143.65.60:3000/api/courses?${
+					category && 'category=' + category
+				}&${search && 'search=' + search}`,
 			);
 
 			dispatch(fetchAPIFinish());
