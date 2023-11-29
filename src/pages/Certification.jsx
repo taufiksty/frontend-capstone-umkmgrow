@@ -8,14 +8,9 @@ import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
 import ImgMaleProfile from '../assets/images/common/male.png';
 import ImgFemaleProfile from '../assets/images/common/female.png';
 import Button from '../components/common/Button';
-import { Document, Page, pdfjs } from 'react-pdf';
-import 'react-pdf/dist/Page/TextLayer.css';
-import 'react-pdf/dist/Page/AnnotationLayer.css';
-
-pdfjs.GlobalWorkerOptions.workerSrc = new URL(
-	'pdfjs-dist/build/pdf.worker.min.js',
-	import.meta.url,
-).toString();
+import { Document, Page } from 'react-pdf/dist/esm/entry.vite';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
 
 function Certification() {
 	const { id } = useParams();
