@@ -13,13 +13,11 @@ export default defineConfig({
 	},
 	server: {
 		cors: {
-			// origin: 'http://18.143.65.60:3000',
-			origin: 'http://localhost:3000',
+			origin: 'http://18.143.65.60:3000',
 		},
 		proxy: {
 			'/api': {
-				// target: 'http://18.143.65.60:3000/api',
-				target: 'http://localhost:3000/api',
+				target: 'http://18.143.65.60:3000/api',
 				changeOrigin: true,
 				secure: false,
 				rewrite: (path) => path.replace(/^\/api/, ''),
