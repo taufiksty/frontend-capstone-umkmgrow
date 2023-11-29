@@ -20,7 +20,10 @@ export const signUp = (body) => {
 		dispatch(fetchAPI());
 
 		try {
-			const response = await axios.post('/api/auth/signup', body);
+			const response = await axios.post(
+				'http://18.143.65.60:3000/api/auth/signup',
+				body,
+			);
 			dispatch(fetchAPIFinish());
 
 			return response.data;
@@ -35,7 +38,10 @@ export const signIn = (body) => {
 		dispatch(fetchAPI());
 
 		try {
-			const response = await axios.post('/api/auth/signin', body);
+			const response = await axios.post(
+				'http://18.143.65.60:3000/api/auth/signin',
+				body,
+			);
 			dispatch(fetchAPIFinish());
 			dispatch(addAuth(response.data.data));
 
@@ -51,9 +57,12 @@ export const signOut = (token) => {
 		dispatch(fetchAPI());
 
 		try {
-			const response = await axios.delete('/api/auth/signout', {
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const response = await axios.delete(
+				'http://18.143.65.60:3000/api/auth/signout',
+				{
+					headers: { Authorization: `Bearer ${token}` },
+				},
+			);
 			dispatch(fetchAPIFinish());
 			dispatch(removeAuth());
 
@@ -69,9 +78,13 @@ export const updateUser = (token, id, body) => {
 		dispatch(fetchAPI());
 
 		try {
-			const response = await axios.put(`/api/users/${id}`, body, {
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const response = await axios.put(
+				`http://18.143.65.60:3000/api/users/${id}`,
+				body,
+				{
+					headers: { Authorization: `Bearer ${token}` },
+				},
+			);
 
 			dispatch(refreshDataUser(response.data.data.user));
 			dispatch(fetchAPIFinish());
@@ -88,9 +101,12 @@ export const refreshUserEnrollments = (token) => {
 		dispatch(fetchAPI());
 
 		try {
-			const response = await axios.get('/api/enrollment', {
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const response = await axios.get(
+				'http://18.143.65.60:3000/api/enrollment',
+				{
+					headers: { Authorization: `Bearer ${token}` },
+				},
+			);
 
 			dispatch(refreshDataUserEnrollments(response.data.data.enrollments));
 			dispatch(fetchAPIFinish());
@@ -105,9 +121,12 @@ export const refreshUserExamHistory = (token) => {
 		dispatch(fetchAPI());
 
 		try {
-			const response = await axios.get('/api/exams/histories', {
-				headers: { Authorization: `Bearer ${token}` },
-			});
+			const response = await axios.get(
+				'http://18.143.65.60:3000/api/exams/histories',
+				{
+					headers: { Authorization: `Bearer ${token}` },
+				},
+			);
 			dispatch(refreshDataUserExamHistories(response.data.data.examHistories));
 			dispatch(fetchAPIFinish());
 		} catch (error) {
