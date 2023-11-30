@@ -14,7 +14,7 @@ export const retrieveCourse = (id) => {
 
 		try {
 			const response = await axios.get(
-				`http://18.143.65.60:3000/api/courses/${id}`,
+				`https://umkmgrow.my.id/api/courses/${id}`,
 			);
 
 			dispatch(fetchAPIFinish());
@@ -33,10 +33,10 @@ export const retrieveCourseModuleContent = (token, id) => {
 
 		try {
 			const response = await axios.get(
-				`http://18.143.65.60:3000/api/courses/${id}`,
+				`https://umkmgrow.my.id/api/courses/${id}`,
 			);
 			const responseModule = await axios.get(
-				`http://18.143.65.60:3000/api/courses/${id}/modules?content=true`,
+				`https://umkmgrow.my.id/api/courses/${id}/modules?content=true`,
 				{ headers: { Authorization: `Bearer ${token}` } },
 			);
 			dispatch(fetchAPIFinish());
@@ -54,7 +54,7 @@ export const retrieveCourseExams = (token, id) => {
 
 		try {
 			const response = await axios.get(
-				`http://18.143.65.60:3000/api/courses/${id}/exams`,
+				`https://umkmgrow.my.id/api/courses/${id}/exams`,
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
@@ -75,7 +75,7 @@ export const retrieveCourseExamHistory = (token, id) => {
 
 		try {
 			const response = await axios.get(
-				`http://18.143.65.60:3000/api/courses/${id}/exams/history`,
+				`https://umkmgrow.my.id/api/courses/${id}/exams/history`,
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
@@ -95,7 +95,7 @@ export const retrieveCourseCertification = (token, id) => {
 
 		try {
 			const response = await axios.get(
-				`http://18.143.65.60:3000/api/courses/${id}/certification`,
+				`https://umkmgrow.my.id/api/courses/${id}/certification`,
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
@@ -115,7 +115,7 @@ export const enrollCourse = (token, body) => {
 
 		try {
 			const response = await axios.post(
-				'http://18.143.65.60:3000/api/enrollment',
+				'https://umkmgrow.my.id/api/enrollment',
 				body,
 				{
 					headers: { Authorization: `Bearer ${token}` },
@@ -136,7 +136,7 @@ export const purchaseCourse = (token, enrollId) => {
 
 		try {
 			const response = await axios.post(
-				`http://18.143.65.60:3000/api/enrollment/${enrollId}/purchase`,
+				`https://umkmgrow.my.id/api/enrollment/${enrollId}/purchase`,
 				{},
 				{ headers: { Authorization: `Bearer ${token}` } },
 			);
@@ -155,7 +155,7 @@ export const submitExam = (token, id, payload) => {
 
 		try {
 			const response = await axios.post(
-				`http://18.143.65.60:3000/api/courses/${id}/exams/submit`,
+				`https://umkmgrow.my.id/api/courses/${id}/exams/submit`,
 				payload,
 				{ headers: { Authorization: `Bearer ${token}` } },
 			);

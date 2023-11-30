@@ -12,7 +12,7 @@ export const retrieveCourses = ({ category, search }) => {
 
 		try {
 			const response = await axios.get(
-				`http://18.143.65.60:3000/api/courses?${
+				`https://umkmgrow.my.id/api/courses?${
 					category && 'category=' + category
 				}&${search && 'search=' + search}`,
 			);
