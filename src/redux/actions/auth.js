@@ -21,7 +21,7 @@ export const signUp = (body) => {
 
 		try {
 			const response = await axios.post(
-				'http://18.143.65.60:3000/api/auth/signup',
+				'https://umkmgrow.my.id/api/auth/signup',
 				body,
 			);
 			dispatch(fetchAPIFinish());
@@ -39,7 +39,7 @@ export const signIn = (body) => {
 
 		try {
 			const response = await axios.post(
-				'http://18.143.65.60:3000/api/auth/signin',
+				'https://umkmgrow.my.id/api/auth/signin',
 				body,
 			);
 			dispatch(fetchAPIFinish());
@@ -58,7 +58,7 @@ export const signOut = (token) => {
 
 		try {
 			const response = await axios.delete(
-				'http://18.143.65.60:3000/api/auth/signout',
+				'https://umkmgrow.my.id/api/auth/signout',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
@@ -79,7 +79,7 @@ export const updateUser = (token, id, body) => {
 
 		try {
 			const response = await axios.put(
-				`http://18.143.65.60:3000/api/users/${id}`,
+				`https://umkmgrow.my.id/api/users/${id}`,
 				body,
 				{
 					headers: { Authorization: `Bearer ${token}` },
@@ -102,7 +102,7 @@ export const refreshUserEnrollments = (token) => {
 
 		try {
 			const response = await axios.get(
-				'http://18.143.65.60:3000/api/enrollment',
+				'https://umkmgrow.my.id/api/enrollment',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
@@ -122,7 +122,7 @@ export const refreshUserExamHistory = (token) => {
 
 		try {
 			const response = await axios.get(
-				'http://18.143.65.60:3000/api/exams/histories',
+				'https://umkmgrow.my.id/api/exams/histories',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},

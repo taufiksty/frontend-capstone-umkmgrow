@@ -14,11 +14,11 @@ export default defineConfig({
 	},
 	server: {
 		cors: {
-			origin: 'http://18.143.65.60:3000',
+			origin: 'https://umkmgrow.my.id',
 		},
 		proxy: {
 			'/api': {
-				target: 'http://18.143.65.60:3000/api',
+				target: 'https://umkmgrow.my.id/api',
 				changeOrigin: true,
 				secure: false,
 				rewrite: (path) => path.replace(/^\/api/, ''),
