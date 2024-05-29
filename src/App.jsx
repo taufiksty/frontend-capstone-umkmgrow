@@ -12,60 +12,66 @@ import Exam from './pages/Exam';
 import Profile from './pages/Profile';
 import ExamReview from './pages/ExamReview';
 import Certification from './pages/Certification';
+import axios from 'axios';
 
 function App() {
 	const authData = useSelector((state) => state.auth.data);
 	const isAuth = Object.keys(authData).length > 0;
 
+	axios
+		.get('https://backend-capstone-umkmgrow.vercel.app/')
+		.then((res) => console.log(res))
+		.catch((e) => console.log(e));
+
 	return (
 		<BrowserRouter>
 			<Routes>
 				<Route
-					path="/"
+					path='/'
 					element={<LandingPage />}
 				/>
 				<Route
-					path="/signup"
-					element={isAuth ? <Navigate to="/" /> : <Signup />}
+					path='/signup'
+					element={isAuth ? <Navigate to='/' /> : <Signup />}
 				/>
 				<Route
-					path="/login"
-					element={isAuth ? <Navigate to="/" /> : <Login />}
+					path='/login'
+					element={isAuth ? <Navigate to='/' /> : <Login />}
 				/>
 				<Route
-					path="/profile"
+					path='/profile'
 					element={isAuth ? <Profile /> : <Login />}
 				/>
 				<Route
-					path="/courses"
+					path='/courses'
 					element={<Courses />}
 				/>
 				<Route
-					path="/courses/:id"
+					path='/courses/:id'
 					element={<CourseDetail />}
 				/>
 				<Route
-					path="/courses/:id/modules"
+					path='/courses/:id/modules'
 					element={isAuth ? <Class /> : <Login />}
 				/>
 				<Route
-					path="/checkout/:enrollId"
+					path='/checkout/:enrollId'
 					element={isAuth ? <Checkout /> : <Login />}
 				/>
 				<Route
-					path="/courses/:id/exams"
+					path='/courses/:id/exams'
 					element={isAuth ? <Exam /> : <Login />}
 				/>
 				<Route
-					path="/courses/:id/exams/history"
+					path='/courses/:id/exams/history'
 					element={isAuth ? <ExamReview /> : <Login />}
 				/>
 				<Route
-					path="/courses/:id/certification"
+					path='/courses/:id/certification'
 					element={isAuth ? <Certification /> : <Login />}
 				/>
 				<Route
-					path="/servererror"
+					path='/servererror'
 					element={<ServerError />}
 				/>
 			</Routes>

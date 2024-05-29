@@ -21,7 +21,7 @@ export const signUp = (body) => {
 
 		try {
 			const response = await axios.post(
-				'https://umkmgrow.my.id/api/auth/signup',
+				'https://backend-capstone-umkmgrow.vercel.app/api/auth/signup',
 				body,
 			);
 			dispatch(fetchAPIFinish());
@@ -39,7 +39,7 @@ export const signIn = (body) => {
 
 		try {
 			const response = await axios.post(
-				'https://umkmgrow.my.id/api/auth/signin',
+				'https://backend-capstone-umkmgrow.vercel.app/api/auth/signin',
 				body,
 			);
 			dispatch(fetchAPIFinish());
@@ -58,7 +58,7 @@ export const signOut = (token) => {
 
 		try {
 			const response = await axios.delete(
-				'https://umkmgrow.my.id/api/auth/signout',
+				'https://backend-capstone-umkmgrow.vercel.app/api/auth/signout',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
@@ -79,7 +79,7 @@ export const updateUser = (token, id, body) => {
 
 		try {
 			const response = await axios.put(
-				`https://umkmgrow.my.id/api/users/${id}`,
+				`https://backend-capstone-umkmgrow.vercel.app/api/users/${id}`,
 				body,
 				{
 					headers: { Authorization: `Bearer ${token}` },
@@ -102,7 +102,7 @@ export const refreshUserEnrollments = (token) => {
 
 		try {
 			const response = await axios.get(
-				'https://umkmgrow.my.id/api/enrollment',
+				'https://backend-capstone-umkmgrow.vercel.app/api/enrollment',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
@@ -122,7 +122,7 @@ export const refreshUserExamHistory = (token) => {
 
 		try {
 			const response = await axios.get(
-				'https://umkmgrow.my.id/api/exams/histories',
+				'https://backend-capstone-umkmgrow.vercel.app/api/exams/histories',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},

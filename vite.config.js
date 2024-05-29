@@ -14,11 +14,11 @@ export default defineConfig({
 	},
 	server: {
 		cors: {
-			origin: 'https://umkmgrow.my.id',
+			origin: 'https://backend-capstone-umkmgrow.vercel.app',
 		},
 		proxy: {
 			'/api': {
-				target: 'https://umkmgrow.my.id/api',
+				target: 'https://backend-capstone-umkmgrow.vercel.app/api',
 				changeOrigin: true,
 				secure: false,
 				rewrite: (path) => path.replace(/^\/api/, ''),
