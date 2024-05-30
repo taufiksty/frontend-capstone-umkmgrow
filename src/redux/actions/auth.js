@@ -21,7 +21,7 @@ export const signUp = (body) => {
 
 		try {
 			const response = await axios.post(
-				'https://backend-capstone-umkmgrow.vercel.app/api/auth/signup',
+				'https://umkmgrow.my.id/api/auth/signup',
 				body,
 			);
 			dispatch(fetchAPIFinish());
@@ -39,7 +39,7 @@ export const signIn = (body) => {
 
 		try {
 			const response = await axios.post(
-				'https://backend-capstone-umkmgrow.vercel.app/api/auth/signin',
+				'https://umkmgrow.my.id/api/auth/signin',
 				body,
 			);
 			dispatch(fetchAPIFinish());
@@ -58,7 +58,7 @@ export const signOut = (token) => {
 
 		try {
 			const response = await axios.delete(
-				'https://backend-capstone-umkmgrow.vercel.app/api/auth/signout',
+				'https://umkmgrow.my.id/api/auth/signout',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
@@ -79,7 +79,7 @@ export const updateUser = (token, id, body) => {
 
 		try {
 			const response = await axios.put(
-				`https://backend-capstone-umkmgrow.vercel.app/api/users/${id}`,
+				`https://umkmgrow.my.id/api/users/${id}`,
 				body,
 				{
 					headers: { Authorization: `Bearer ${token}` },
@@ -102,13 +102,15 @@ export const refreshUserEnrollments = (token) => {
 
 		try {
 			const response = await axios.get(
-				'https://backend-capstone-umkmgrow.vercel.app/api/enrollment',
+				'https://umkmgrow.my.id/api/enrollment',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
 			);
 
-			dispatch(refreshDataUserEnrollments(response.data.data.enrollments));
+			dispatch(
+				refreshDataUserEnrollments(response.data.data.enrollments),
+			);
 			dispatch(fetchAPIFinish());
 		} catch (error) {
 			dispatch(fetchAPIError(error.message));
@@ -122,12 +124,14 @@ export const refreshUserExamHistory = (token) => {
 
 		try {
 			const response = await axios.get(
-				'https://backend-capstone-umkmgrow.vercel.app/api/exams/histories',
+				'https://umkmgrow.my.id/api/exams/histories',
 				{
 					headers: { Authorization: `Bearer ${token}` },
 				},
 			);
-			dispatch(refreshDataUserExamHistories(response.data.data.examHistories));
+			dispatch(
+				refreshDataUserExamHistories(response.data.data.examHistories),
+			);
 			dispatch(fetchAPIFinish());
 		} catch (error) {
 			dispatch(fetchAPIError(error.message));

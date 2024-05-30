@@ -19,7 +19,7 @@ function App() {
 	const isAuth = Object.keys(authData).length > 0;
 
 	axios
-		.get('https://backend-capstone-umkmgrow.vercel.app/')
+		.get('https://umkmgrow.my.id/')
 		.then((res) => console.log(res))
 		.catch((e) => console.log(e));
 

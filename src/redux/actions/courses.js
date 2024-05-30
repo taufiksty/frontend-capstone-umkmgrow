@@ -12,7 +12,7 @@ export const retrieveCourses = ({ category, search }) => {
 
 		try {
 			const response = await axios.get(
-				`https://backend-capstone-umkmgrow.vercel.app/api/courses?${
+				`https://umkmgrow.my.id/api/courses?${
 					category && 'category=' + category
 				}&${search && 'search=' + search}`,
 			);
