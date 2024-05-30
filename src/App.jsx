@@ -12,16 +12,10 @@ import Exam from './pages/Exam';
 import Profile from './pages/Profile';
 import ExamReview from './pages/ExamReview';
 import Certification from './pages/Certification';
-import axios from 'axios';
 
 function App() {
 	const authData = useSelector((state) => state.auth.data);
 	const isAuth = Object.keys(authData).length > 0;
-
-	axios
-		.get('https://umkmgrow.my.id/')
-		.then((res) => console.log(res))
-		.catch((e) => console.log(e));
 
 	return (
 		<BrowserRouter>
